@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Workout App</title>
+  </head>
+  <body>
+    <div style="width: 100%; display: flex; justify-content: flex-end">
+      <p id="user-name uppercase">Bailey</p>
+    </div>
+    <div class="content">
+      <div class="box one">
+        <h1 class="header uppercase">Activities</h1>
+        <div class="sport run">
+          <h2>Run</h2>
+          <ul id="run"></ul>
+        </div>
+        <div class="sport swim">
+          <h2>Swim</h2>
+          <ul id="swim"></ul>
+        </div>
+        <div class="sport bike">
+          <h2>Bike</h2>
+
+          <ul id="bike"></ul>
+        </div>
+        <div class="newTodo">
+          <div id="form" style="display: flex">
+            <form class="name">
+              <select id="sports">
+                <option value="1">Run</option>
+                <option value="2">Swim</option>
+                <option value="3">Bike</option>
+              </select>
+              <input type="text" id="workoutTime" placeholder="Time" />
+              <input
+                type="text"
+                id="workoutDistance"
+                title="Category"
+                placeholder="Distance"
+              />
+            </form>
+            <form>
+              <button type="submit" id="addTodo" class="addBtn">+</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="box two">
+        <h1 class="header uppercase center">Goals</h1>
+      </div>
+      <div class="box three">
+        <h1 class="header uppercase center">Distances</h1>
+      </div>
+      <div class="box four">
+        <h1 class="header uppercase center">Rankings</h1>
+      </div>
+    </div>
+
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+      }
+      .uppercase {
+        text-transform: uppercase;
+      }
+      .center {
+        text-align: center;
+      }
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* align-items: center; */
+      }
+      .box {
+        width: 45%;
+        border: 2px solid grey;
+        border-radius: 25px;
+        margin: 20px;
+      }
+
+      .one {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header {
+        letter-spacing: 1px;
+        font-weight: 400;
+      }
+      .sport {
+        width: 90%;
+        margin: 15px 0px;
+        padding-left: 20px;
+        border: 2px solid gray;
+        border-radius: 15px;
+      }
+
+      .sport h2 {
+        font-weight: 300;
+      }
+    </style>
+
+    <script>
+      let workouts = [];
+
+      console.log(workouts);
+
+      const form = document.querySelector("#form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault;
+        let time = document.getElementById("workoutTime").value;
+
+        let distance = document.getElementById("workoutDistance").value;
+
+        let sportDropdown = document.getElementById("sports");
+        let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
+
+        if (time === " ") {
+          alert("Please input a time");
+        } else if (distance === " ") {
+          alert("Please input a distance");
+        } else {
+          addWorkoutToArray(time, distance, sport);
+        }
+      });
+
+      function addWorkoutToArray(t, d, s) {
+        let workoutData = {
+          sport: s,
+          time: t,
+          distance: d,
+        };
+
+        console.log(t);
+
+        workouts.push(workoutData);
+      }
+
+      console.log(addWorkoutToArray());
+
+      //   window.addEventListener("load", (event) => {
+      //       userName()
+      //   });
+
+      //   const userName = () => {
+      //   var person = prompt("Please enter your name");
+      //   if (person != null) {
+      //     document.getElementById("user-name").innerHTML =
+      //       "Hello " + person ;
+      //   }
+      //   }
+    </script>
+  </body>
+</html>
