@@ -48,6 +48,23 @@
       </div>
       <div class="box two">
         <h1 class="header uppercase center">Goals</h1>
+        <div class="newWorkout">
+            <div id="form" style="display: flex">
+              <form class="name">
+                <select id="sports">
+                  <option value="1">Run</option>
+                  <option value="2">Swim</option>
+                  <option value="3">Bike</option>
+                </select>
+                <input type="text" id="gotalDistance" placeholder="Goal Distance"
+                />
+              </form>
+              <form>
+                <button type="submit" id="addWorkout" class="addBtn">+</button>
+              </form>
+            </div>
+          </div>
+        <div></div>
       </div>
       <div class="box three">
         <h1 class="header uppercase center">Distances</h1>
@@ -103,6 +120,6 @@
           padding: 15px 0px;
       }
     </style>
-    <script src="activities.js"></script>
+    <script src="workouts.js"></script>
   </body>
 </html>

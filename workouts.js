@@ -55,7 +55,6 @@ function createWorkoutContent(workout) {
       bikeList.appendChild(workoutItem)
   }
 
-
 }
 
 function main() {
