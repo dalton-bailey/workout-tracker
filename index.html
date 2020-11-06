@@ -16,20 +16,19 @@
     <div class="content">
       <div class="box one">
         <h1 class="header uppercase">Activities</h1>
-        <div class="sport run">
+        <div class="sport">
           <h2>Run</h2>
-          <ul id="run"></ul>
+          <ul class="run"></ul>
         </div>
-        <div class="sport swim">
+        <div class="sport">
           <h2>Swim</h2>
-          <ul id="swim"></ul>
+          <ul class="swim"></ul>
         </div>
-        <div class="sport bike">
+        <div class="sport">
           <h2>Bike</h2>
-
-          <ul id="bike"></ul>
+          <ul class="bike"></ul>
         </div>
-        <div class="newTodo">
+        <div class="newWorkout">
           <div id="form" style="display: flex">
             <form class="name">
               <select id="sports">
@@ -38,15 +37,11 @@
                 <option value="3">Bike</option>
               </select>
               <input type="text" id="workoutTime" placeholder="Time" />
-              <input
-                type="text"
-                id="workoutDistance"
-                title="Category"
-                placeholder="Distance"
+              <input type="text" id="workoutDistance" placeholder="Distance"
               />
             </form>
             <form>
-              <button type="submit" id="addTodo" class="addBtn">+</button>
+              <button type="submit" id="addWorkout" class="addBtn">+</button>
             </form>
           </div>
         </div>
@@ -101,62 +96,13 @@
         border: 2px solid gray;
         border-radius: 15px;
       }
-
       .sport h2 {
         font-weight: 300;
       }
-    </style>
-
-    <script>
-      let workouts = [];
-
-      console.log(workouts);
-
-      const form = document.querySelector("#form");
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault;
-        let time = document.getElementById("workoutTime").value;
-
-        let distance = document.getElementById("workoutDistance").value;
-
-        let sportDropdown = document.getElementById("sports");
-        let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
-
-        if (time === " ") {
-          alert("Please input a time");
-        } else if (distance === " ") {
-          alert("Please input a distance");
-        } else {
-          addWorkoutToArray(time, distance, sport);
-        }
-      });
-
-      function addWorkoutToArray(t, d, s) {
-        let workoutData = {
-          sport: s,
-          time: t,
-          distance: d,
-        };
-
-        console.log(t);
-
-        workouts.push(workoutData);
+      .newWorkout {
+          padding: 15px 0px;
       }
-
-      console.log(addWorkoutToArray());
-
-      //   window.addEventListener("load", (event) => {
-      //       userName()
-      //   });
-
-      //   const userName = () => {
-      //   var person = prompt("Please enter your name");
-      //   if (person != null) {
-      //     document.getElementById("user-name").innerHTML =
-      //       "Hello " + person ;
-      //   }
-      //   }
-    </script>
+    </style>
+    <script src="activities.js"></script>
   </body>
 </html>
