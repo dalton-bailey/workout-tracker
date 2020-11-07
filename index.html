@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="workouts.css" />
     <title>Workout App</title>
   </head>
   <body>
@@ -14,41 +15,22 @@
       <p id="user-name uppercase">Bailey</p>
     </div>
     <div class="content">
-      <div class="box one">
-        <h1 class="header uppercase">Activities</h1>
-        <div class="sport">
-          <h2>Run</h2>
-          <ul class="run"></ul>
-        </div>
-        <div class="sport">
-          <h2>Swim</h2>
-          <ul class="swim"></ul>
-        </div>
-        <div class="sport">
-          <h2>Bike</h2>
-          <ul class="bike"></ul>
-        </div>
-        <div class="newWorkout">
-          <div id="form" style="display: flex">
-            <form class="name">
-              <select id="sports">
-                <option value="1">Run</option>
-                <option value="2">Swim</option>
-                <option value="3">Bike</option>
-              </select>
-              <input type="text" id="workoutTime" placeholder="Time" />
-              <input type="text" id="workoutDistance" placeholder="Distance"
-              />
-            </form>
-            <form>
-              <button type="submit" id="addWorkout" class="addBtn">+</button>
-            </form>
+      <div class="sectionOne">
+        <div class="one">
+          <h1 class="header uppercase">Activities</h1>
+          <div class="sport">
+            <h2>Run</h2>
+            <div class="run"></div>
           </div>
-        </div>
-      </div>
-      <div class="box two">
-        <h1 class="header uppercase center">Goals</h1>
-        <div class="newWorkout">
+          <div class="sport">
+            <h2>Swim</h2>
+            <div class="swim"></div>
+          </div>
+          <div class="sport">
+            <h2>Bike</h2>
+            <div class="bike"></div>
+          </div>
+          <div class="newWorkout">
             <div id="form" style="display: flex">
               <form class="name">
                 <select id="sports">
@@ -56,7 +38,11 @@
                   <option value="2">Swim</option>
                   <option value="3">Bike</option>
                 </select>
-                <input type="text" id="gotalDistance" placeholder="Goal Distance"
+                <input type="text" id="workoutTime" placeholder="Time" />
+                <input
+                  type="text"
+                  id="workoutDistance"
+                  placeholder="Distance"
                 />
               </form>
               <form>
@@ -64,62 +50,40 @@
               </form>
             </div>
           </div>
-        <div></div>
+        </div>
       </div>
-      <div class="box three">
-        <h1 class="header uppercase center">Distances</h1>
-      </div>
-      <div class="box four">
-        <h1 class="header uppercase center">Rankings</h1>
+      <div class="sectionTwo">
+        <div class="box two">
+          <h1 class="header uppercase center">Goals</h1>
+          <div class="newWorkout">
+            <div id="form" style="display: flex">
+              <form class="name">
+                <select id="sports">
+                  <option value="1">Run</option>
+                  <option value="2">Swim</option>
+                  <option value="3">Bike</option>
+                </select>
+                <input
+                  type="text"
+                  id="gotalDistance"
+                  placeholder="Goal Distance"
+                />
+              </form>
+              <form>
+                <button type="submit" id="addWorkout" class="addBtn">+</button>
+              </form>
+            </div>
+          </div>
+          <div></div>
+        </div>
+        <div class="box three">
+          <h1 class="header uppercase center">Distances</h1>
+        </div>
+        <div class="box four">
+          <h1 class="header uppercase center">Rankings</h1>
+        </div>
       </div>
     </div>
-
-    <style>
-      body {
-        font-family: "Lato", sans-serif;
-      }
-      .uppercase {
-        text-transform: uppercase;
-      }
-      .center {
-        text-align: center;
-      }
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        /* align-items: center; */
-      }
-      .box {
-        width: 45%;
-        border: 2px solid grey;
-        border-radius: 25px;
-        margin: 20px;
-      }
-
-      .one {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .header {
-        letter-spacing: 1px;
-        font-weight: 400;
-      }
-      .sport {
-        width: 90%;
-        margin: 15px 0px;
-        padding-left: 20px;
-        border: 2px solid gray;
-        border-radius: 15px;
-      }
-      .sport h2 {
-        font-weight: 300;
-      }
-      .newWorkout {
-          padding: 15px 0px;
-      }
-    </style>
     <script src="workouts.js"></script>
   </body>
 </html>

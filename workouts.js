@@ -40,9 +40,10 @@ function createWorkoutContent(workout) {
   const swimList = document.querySelector(".swim")
   const bikeList = document.querySelector(".bike")
 
-  const workoutItem = document.createElement("li");
+  const workoutItem = document.createElement("div");
+  workoutItem.className = "listItem"
 
-  workoutItem.innerHTML = `<label>Time:${workout.time} minutes Distance:${workout.distance} miles Pace: ${workout.pace} minutes per mile</label>
+  workoutItem.innerHTML = `<p>Time: ${workout.time} minutes </p> <p> Distance: ${workout.distance} miles </p> <p> Pace: ${workout.pace} minutes per mile</p>
   <button class="close"> X </button>`;
 
   if (workout.sport === "Run") {
