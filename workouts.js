@@ -1,5 +1,27 @@
-// const api = ""
+const api = "https://gentle-spire-21312.herokuapp.com/workouts";
 let workouts = [];
+
+//fetch todos
+async function fetchTodos() {
+  let response = await fetch(api);
+  let workouts = await response.json();
+
+  console.log(workouts);
+
+  return workouts;
+}
+
+//post
+async function postWorkout(data) {
+  let response = await fetch(api, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log(response);
+}
 
 // push new workout to workouts array
 function addWorkoutToArray(t, d, s) {
@@ -10,53 +32,48 @@ function addWorkoutToArray(t, d, s) {
     pace: (t / d).toFixed(2),
   };
 
+  postWorkout(workoutData);
+
   workouts.push(workoutData);
 
   displayWorkouts();
 
-  console.log("all workouts",workouts);
-
+  console.log("all workouts", workouts);
 }
-
 
 //add workout
 function displayWorkouts() {
   const runList = document.querySelector(".run");
   runList.innerHTML = "";
 
-  let runWorkoutList = workouts.filter(workout => workout.sport === "Run")
-  let swimWorkoutList = workouts.filter(workout => workout.sport === "Swim")
-  let bikeWorkoutList = workouts.filter(workout => workout.sport === "Bike")
+  let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
+  let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
+  let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
 
   runWorkoutList.forEach((workout) => createWorkoutContent(workout));
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
-
-
 }
 
 //display workouts
 function createWorkoutContent(workout) {
   const runList = document.querySelector(".run");
-  const swimList = document.querySelector(".swim")
-  const bikeList = document.querySelector(".bike")
+  const swimList = document.querySelector(".swim");
+  const bikeList = document.querySelector(".bike");
 
   const workoutItem = document.createElement("div");
-  workoutItem.className = "listItem"
+  workoutItem.className = "listItem";
 
   workoutItem.innerHTML = `<p>Time: ${workout.time} minutes </p> <p> Distance: ${workout.distance} miles </p> <p> Pace: ${workout.pace} minutes per mile</p>
   <button class="close"> X </button>`;
 
   if (workout.sport === "Run") {
     runList.appendChild(workoutItem);
-  } 
-  else if (workout.sport === "Swim") {
-    swimList.appendChild(workoutItem)
-  } 
-  else if (workout.sport === "Bike") {
-      bikeList.appendChild(workoutItem)
+  } else if (workout.sport === "Swim") {
+    swimList.appendChild(workoutItem);
+  } else if (workout.sport === "Bike") {
+    bikeList.appendChild(workoutItem);
   }
-
 }
 
 function main() {
