@@ -1,3 +1,4 @@
+// const api = ""
 let workouts = [];
 
 // push new workout to workouts array
