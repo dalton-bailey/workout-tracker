@@ -14,6 +14,10 @@ const WorkoutsSchema = new Schema({
     type: Number,
     required: true,
   },
+  pace: {
+    type: Number,
+    required: true,
+  }
 });
 
 const Workouts = mongoose.model('Workouts', WorkoutsSchema);
