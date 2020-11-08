@@ -2,13 +2,13 @@ const api = "https://gentle-spire-21312.herokuapp.com/workouts";
 let workouts = [];
 
 //fetch todos
-async function fetchTodos() {
+async function fetchWorkouts() {
   let response = await fetch(api);
-  let workouts = await response.json();
+  let fetchedWorkouts = await response.json();
 
   console.log(workouts);
 
-  return workouts;
+  return fetchedWorkouts;
 }
 
 //post
@@ -76,7 +76,9 @@ function createWorkoutContent(workout) {
   }
 }
 
-function main() {
+async function main() {
+  const fetchedWorkouts = await fetchWorkouts();
+  workouts = fetchedWorkouts
   displayWorkouts();
 
   const form = document.querySelector("#form");

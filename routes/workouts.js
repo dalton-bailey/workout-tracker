@@ -11,6 +11,7 @@ router.post('/', (req, res) => {
     sport: req.body.sport,
     time: req.body.time,
     distance: req.body.distance,
+    pace: req.body.pace
   })
     .then((workouts) => {
       res.json(workouts);
@@ -32,6 +33,18 @@ router.get('/', (req, res, next) => {
     })
     .catch((err) => {
         res.json(err)
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    Workouts.deleteOne({ _id: req.params.id }, (err, workouts) => {
+        if (err) console.log(err)
+        res.json(workouts)
+
+        Workouts.find((err, workouts) => {
+            if (err) console.log(handleError(err));
+            res.json(workouts);
+          });
     })
 })
 
