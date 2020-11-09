@@ -49,6 +49,15 @@ body {
       display: flex;
       justify-content: space-around;
   }
+
+  .listItem div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .listItem div p {
+    margin: 0px;
+  }
   .sectionTwo {
       display: flex;
   }

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/8ad599954f.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
@@ -19,22 +20,23 @@
         <div class="one">
           <h1 class="header uppercase">Activities</h1>
           <div class="sport">
-            <h2>Run</h2>
+            <h2><i class="fas fa-running"></i></h2>
             <div class="run"></div>
           </div>
           <div class="sport">
-            <h2>Swim</h2>
+            <h2><i class="fas fa-swimmer"></i></h2>
             <div class="swim"></div>
           </div>
           <div class="sport">
-            <h2>Bike</h2>
+            <h2><i class="fas fa-biking"></i></h2>
             <div class="bike"></div>
           </div>
           <div class="newWorkout">
             <div id="form" style="display: flex">
               <form class="name">
                 <select id="sports">
-                  <option value="1"><i class="fas fa-running"></i></option>
+                  <option value="1">Run
+                  </option>
                   <option value="2">Swim</option>
                   <option value="3">Bike</option>
                 </select>
@@ -46,7 +48,7 @@
                 />
               </form>
               <form>
-                <button type="submit" id="addWorkout" class="addBtn">+</button>
+                <button type="submit" id="addWorkout" class="addBtn"><i class="fas fa-plus"></i></button>
               </form>
             </div>
           </div>
@@ -62,6 +64,8 @@
                   <option value="1">Run</option>
                   <option value="2">Swim</option>
                   <option value="3">Bike</option>
+                  
+                  
                 </select>
                 <input
                   type="text"
@@ -85,6 +89,5 @@
       </div>
     </div>
     <script src="workouts.js"></script>
-    <script src="https://kit.fontawesome.com/51ac70d1a6.js" crossorigin="anonymous"></script>
   </body>
 </html>

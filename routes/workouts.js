@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const cors = require("cors");
+// const cors = require("cors");
 
-router.use(cors());
+// router.use(cors());
 
 const Workouts = require("../models/workoutModel");
 
@@ -39,7 +39,6 @@ router.get('/', (req, res, next) => {
 router.delete('/:id', (req, res) => {
     Workouts.deleteOne({ _id: req.params.id }, (err, workouts) => {
         if (err) console.log(err)
-        res.json(workouts)
 
         Workouts.find((err, workouts) => {
             if (err) console.log(handleError(err));

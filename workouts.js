@@ -1,17 +1,18 @@
 const api = "https://gentle-spire-21312.herokuapp.com/workouts";
 let workouts = [];
 
-//fetch todos
+
+//fetch workouts
 async function fetchWorkouts() {
   let response = await fetch(api);
   let fetchedWorkouts = await response.json();
 
-  console.log(workouts);
+  console.log(fetchedWorkouts)
 
   return fetchedWorkouts;
 }
 
-//post
+//post fetch
 async function postWorkout(data) {
   let response = await fetch(api, {
     method: "POST",
@@ -21,6 +22,16 @@ async function postWorkout(data) {
     },
   });
   console.log(response);
+}
+
+//delete fetch
+async function deleteWorkout(id) {
+  let response = await fetch(api + "/" + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
 }
 
 // push new workout to workouts array
@@ -38,13 +49,37 @@ function addWorkoutToArray(t, d, s) {
 
   displayWorkouts();
 
-  console.log("all workouts", workouts);
+  console.log("all workouts", workouts[0]._id);
+}
+
+//splice workout for user interface
+function spliceWorkout(id) {
+  const index = workouts.findIndex((workout) => workout.id == id)
+  deleteWorkout(id)
+  workouts.splice(index, 1)
+  displayWorkouts()
+}
+
+//delete workouts
+function setupDeleteButtons() {
+  const close = document.getElementsByClassName("close");
+  for (let t = 0; t < close.length; t++) {
+    close[t].addEventListener("click", (event) => {
+      spliceWorkout(event.target.dataset.id)
+    })
+  }
 }
 
 //add workout
 function displayWorkouts() {
   const runList = document.querySelector(".run");
   runList.innerHTML = "";
+
+  const swimList = document.querySelector(".swim")
+  swimList.innerHTML = "";
+
+  const bikeList = document.querySelector(".bike")
+  bikeList.innerHTML = ""
 
   let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
   let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
@@ -53,6 +88,8 @@ function displayWorkouts() {
   runWorkoutList.forEach((workout) => createWorkoutContent(workout));
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
+
+  setupDeleteButtons()
 }
 
 //display workouts
@@ -64,8 +101,17 @@ function createWorkoutContent(workout) {
   const workoutItem = document.createElement("div");
   workoutItem.className = "listItem";
 
-  workoutItem.innerHTML = `<p>Time: ${workout.time} minutes </p> <p> Distance: ${workout.distance} miles </p> <p> Pace: ${workout.pace} minutes per mile</p>
-  <button class="close"> X </button>`;
+  const check = document.createElement("input")
+  check.type = "checkbox"
+  check.dataset.id = workout._id
+  check.className = "check"
+  check.id = "check"
+  check.check = workout.complete
+
+  workoutItem.innerHTML = `<div> <p> Distance </p> <p> ${workout.distance} miles </p> </div> 
+  <div> <p>Time </p> <p> ${workout.time} minutes </p> </div> 
+  <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
+  <button data-id="${workout._id}" class="close"> X </button>`;
 
   if (workout.sport === "Run") {
     runList.appendChild(workoutItem);
@@ -78,8 +124,10 @@ function createWorkoutContent(workout) {
 
 async function main() {
   const fetchedWorkouts = await fetchWorkouts();
-  workouts = fetchedWorkouts
+  workouts = fetchedWorkouts;
   displayWorkouts();
+
+  console.log(workouts)
 
   const form = document.querySelector("#form");
 
