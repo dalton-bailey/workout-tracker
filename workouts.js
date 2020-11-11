@@ -86,8 +86,8 @@ function setupDeleteButtons() {
 }
 
 function completeTodo(id) {
-  const index = workouts.findIndex((workout) => workout._id == id)
-  console.log(index)
+  const index = workouts.findIndex((workout) => workout._id == id);
+  console.log(index);
   const complete = {
     complete: true,
   };
@@ -102,6 +102,31 @@ function setupCheckmarks() {
       completeTodo(event.target.dataset.id);
     });
   }
+}
+
+function distances() {
+  const runDistance = document.getElementById("run-distance");
+  runDistance.innerHTML = ""
+
+  const swimDistance = document.getElementById("swim-distance");
+  swimDistance.innerHTML = ""
+
+  const bikeDistance = document.getElementById("bike-distance");
+  bikeDistance.innerHTML = ""
+
+  let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
+  let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
+  let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
+
+  let runTotal = runWorkoutList.reduce((acc, curr) => acc + curr.distance, 0);
+  let swimTotal = swimWorkoutList.reduce((acc, curr) => acc + curr.distance, 0);
+  let bikeTotal = bikeWorkoutList.reduce((acc, curr) => acc + curr.distance, 0);
+
+  console.log(runTotal, swimTotal, bikeTotal);
+
+  runDistance.innerHTML = runTotal + " total miles"
+  swimDistance.innerHTML = swimTotal + " total miles"
+  bikeDistance.innerHTML = bikeTotal + " total miles"
 }
 
 //add workout
@@ -123,8 +148,11 @@ function displayWorkouts() {
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
 
+  runWorkoutList.forEach((workout) => distances(workout));
+
   setupDeleteButtons();
-  setupCheckmarks()
+  setupCheckmarks();
+  distances()
 }
 
 //display workouts
@@ -148,7 +176,7 @@ function createWorkoutContent(workout) {
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
   <button data-id="${workout._id}" class="close"> X </button>`;
 
-  workoutItem.prepend(check)
+  workoutItem.prepend(check);
 
   if (workout.sport === "Run") {
     runList.appendChild(workoutItem);

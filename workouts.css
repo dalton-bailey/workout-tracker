@@ -1,63 +1,68 @@
 body {
-    font-family: "Lato", sans-serif;
-  }
-  .uppercase {
-    text-transform: uppercase;
-  }
-  .center {
-    text-align: center;
-  }
-  .sectionOne {
-      margin: 25px;
-  }
-  .box {
-    width: 33%;
-    border: 2px solid grey;
-    border-radius: 25px;
-    margin: 20px;
-  }
-  .one {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid grey;
-    border-radius: 25px;
-    width: 100%;
-  }
-  .header {
-    letter-spacing: 1px;
-    font-weight: 400;
-  }
-  .sport {
-    width: 90%;
-    margin: 15px 0px;
-    padding: 10px;
-    border: 2px solid gray;
-    border-radius: 15px;
-  }
-  .sport h2 {
-    text-align: center;
-    font-weight: 300;
-  }
-  .newWorkout {
-      padding: 15px 0px;
-  }
-  .listItem {
-      border: 1px solid black;
-      border-radius: 15px;
-      padding: 15px;
-      display: flex;
-      justify-content: space-around;
-  }
+  font-family: "Lato", sans-serif;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.center {
+  text-align: center;
+}
+.sectionOne {
+  margin: 25px;
+}
+.box {
+  width: 33%;
+  border: 2px solid grey;
+  border-radius: 25px;
+  margin: 20px;
+}
+.one {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid grey;
+  border-radius: 25px;
+  width: 100%;
+}
+.header {
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.sport {
+  width: 90%;
+  margin: 15px 0px;
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 15px;
+}
+.sport h2 {
+  text-align: center;
+  font-weight: 300;
+}
+.newWorkout {
+  padding: 15px 0px;
+}
+.listItem {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+}
 
-  .listItem div {
-    display: flex;
-    flex-direction: column;
-  }
+.listItem div {
+  display: flex;
+  flex-direction: column;
+}
 
-  .listItem div p {
-    margin: 0px;
-  }
-  .sectionTwo {
-      display: flex;
-  }
+.listItem div p {
+  margin: 0px;
+}
+.sectionTwo {
+  display: flex;
+}
+
+.distances div{
+  display: flex;
+  justify-content: space-evenly;
+}
