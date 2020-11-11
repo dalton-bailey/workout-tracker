@@ -1,13 +1,13 @@
 const api = "https://gentle-spire-21312.herokuapp.com/workouts";
+// const api = "http://localhost:3000/workouts";
 let workouts = [];
-
 
 //fetch workouts
 async function fetchWorkouts() {
   let response = await fetch(api);
   let fetchedWorkouts = await response.json();
 
-  console.log(fetchedWorkouts)
+  console.log(fetchedWorkouts);
 
   return fetchedWorkouts;
 }
@@ -21,7 +21,6 @@ async function postWorkout(data) {
       "Content-Type": "application/json",
     },
   });
-  console.log(response);
 }
 
 //delete fetch
@@ -31,12 +30,23 @@ async function deleteWorkout(id) {
     headers: {
       "Content-Type": "application/json",
     },
-  })
+  });
+}
+
+//complete fetch
+async function completePut(id) {
+  let response = await fetch(api + "/" + id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 // push new workout to workouts array
 function addWorkoutToArray(t, d, s) {
   const workoutData = {
+    complete: false,
     sport: s,
     time: t,
     distance: d,
@@ -49,15 +59,18 @@ function addWorkoutToArray(t, d, s) {
 
   displayWorkouts();
 
-  console.log("all workouts", workouts[0]._id);
+  console.log("all workouts", workouts);
 }
 
 //splice workout for user interface
 function spliceWorkout(id) {
-  const index = workouts.findIndex((workout) => workout.id == id)
-  deleteWorkout(id)
-  workouts.splice(index, 1)
-  displayWorkouts()
+  console.log(workouts, id);
+  const index = workouts.findIndex((workout) => workout._id == id);
+  deleteWorkout(id);
+  workouts.splice(index, 1);
+  displayWorkouts();
+
+  console.log(index);
 }
 
 //delete workouts
@@ -65,8 +78,29 @@ function setupDeleteButtons() {
   const close = document.getElementsByClassName("close");
   for (let t = 0; t < close.length; t++) {
     close[t].addEventListener("click", (event) => {
-      spliceWorkout(event.target.dataset.id)
-    })
+      spliceWorkout(event.target.dataset.id);
+      // let id = event.target.dataset.id;
+      // console.log(id, workouts);
+    });
+  }
+}
+
+function completeTodo(id) {
+  const index = workouts.findIndex((workout) => workout._id == id)
+  console.log(index)
+  const complete = {
+    complete: true,
+  };
+  completePut(complete);
+}
+
+//set up checkmark
+function setupCheckmarks() {
+  const check = document.getElementsByClassName("check");
+  for (let t = 0; t < check.length; t++) {
+    check[t].addEventListener("click", (event) => {
+      completeTodo(event.target.dataset.id);
+    });
   }
 }
 
@@ -75,11 +109,11 @@ function displayWorkouts() {
   const runList = document.querySelector(".run");
   runList.innerHTML = "";
 
-  const swimList = document.querySelector(".swim")
+  const swimList = document.querySelector(".swim");
   swimList.innerHTML = "";
 
-  const bikeList = document.querySelector(".bike")
-  bikeList.innerHTML = ""
+  const bikeList = document.querySelector(".bike");
+  bikeList.innerHTML = "";
 
   let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
   let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
@@ -89,7 +123,8 @@ function displayWorkouts() {
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
 
-  setupDeleteButtons()
+  setupDeleteButtons();
+  setupCheckmarks()
 }
 
 //display workouts
@@ -101,17 +136,19 @@ function createWorkoutContent(workout) {
   const workoutItem = document.createElement("div");
   workoutItem.className = "listItem";
 
-  const check = document.createElement("input")
-  check.type = "checkbox"
-  check.dataset.id = workout._id
-  check.className = "check"
-  check.id = "check"
-  check.check = workout.complete
+  const check = document.createElement("input");
+  check.type = "checkbox";
+  check.dataset.id = workout._id;
+  check.className = "check";
+  check.id = "check";
+  check.check = workout.complete;
 
   workoutItem.innerHTML = `<div> <p> Distance </p> <p> ${workout.distance} miles </p> </div> 
   <div> <p>Time </p> <p> ${workout.time} minutes </p> </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
   <button data-id="${workout._id}" class="close"> X </button>`;
+
+  workoutItem.prepend(check)
 
   if (workout.sport === "Run") {
     runList.appendChild(workoutItem);
@@ -127,7 +164,7 @@ async function main() {
   workouts = fetchedWorkouts;
   displayWorkouts();
 
-  console.log(workouts)
+  console.log(workouts);
 
   const form = document.querySelector("#form");
 
