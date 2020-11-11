@@ -5,7 +5,7 @@ const WorkoutsSchema = new Schema({
   complete: {
     type: Boolean,
     required: true,
-  },
+},
   sport: {
     type: String,
     required: true,

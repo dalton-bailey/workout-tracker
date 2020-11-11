@@ -141,7 +141,7 @@ function createWorkoutContent(workout) {
   check.dataset.id = workout._id;
   check.className = "check";
   check.id = "check";
-  check.check = workout.complete;
+  check.checked = workout.complete;
 
   workoutItem.innerHTML = `<div> <p> Distance </p> <p> ${workout.distance} miles </p> </div> 
   <div> <p>Time </p> <p> ${workout.time} minutes </p> </div> 

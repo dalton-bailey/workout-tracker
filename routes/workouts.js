@@ -50,7 +50,10 @@ router.delete("/:id", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  Workouts.findByIdAndUpdate({ _id: req.params.id }, (err, workouts) => {
+  Workouts.findByIdAndUpdate({ 
+    _id: req.params.id,
+    complete: req.body.complete 
+  }, (err, workouts) => {
     if (err) console.log(err);
 
       Workouts.find((err, workouts) => {
