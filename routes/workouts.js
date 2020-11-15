@@ -49,15 +49,20 @@ router.delete("/:id", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  Workouts.findById({ _id: req.params.id }, (err, workouts) => {
-    console.log(err);
-    if (err) console.log(handleError(err));
+  Workouts.findByIdAndUpdate(req.params.id, { new: true }, (err, workouts) => {
+    workouts.complete = !workouts.complete;
 
-    workouts.update({ complete: !workout.complete }, (err, workouts) => {
-      if (err) console.log(err);
+    Workouts.updateOne(req.query, (err, workouts) => {
+      console.log(workouts);
+
+      if (err) {
+        console.log(err);
+      }
 
       Workouts.find((err, workouts) => {
-        if (err) console.log(handleError(err));
+        if (err) {
+          console.log(err);
+        }
         res.json(workouts);
       });
     });
