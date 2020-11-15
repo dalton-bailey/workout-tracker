@@ -48,25 +48,25 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-router.put("/:id", (req, res) => {
-  Workouts.findByIdAndUpdate(req.params.id, { new: true }, (err, workouts) => {
-    workouts.complete = !workouts.complete;
+// router.put("/:id", (req, res) => {
+//   Workouts.findByIdAndUpdate(req.params.id, { new: true }, (err, workouts) => {
+//     workouts.complete = !workouts.complete;
 
-    Workouts.updateOne(req.query, (err, workouts) => {
-      console.log(workouts);
+//     Workouts.updateOne(req.query, (err, workouts) => {
+//       console.log(workouts);
 
-      if (err) {
-        console.log(err);
-      }
+//       if (err) {
+//         console.log(err);
+//       }
 
-      Workouts.find((err, workouts) => {
-        if (err) {
-          console.log(err);
-        }
-        res.json(workouts);
-      });
-    });
-  });
-});
+//       Workouts.find((err, workouts) => {
+//         if (err) {
+//           console.log(err);
+//         }
+//         res.json(workouts);
+//       });
+//     });
+//   });
+// });
 
 module.exports = router;
