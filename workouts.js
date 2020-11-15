@@ -19,7 +19,6 @@ async function postWorkout(data) {
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
-      
     },
   });
 }
@@ -86,13 +85,13 @@ function setupDeleteButtons() {
   }
 }
 
-function completeTodo(id) {
+function completeWorkout(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
   console.log(index);
   const complete = {
     complete: true,
   };
-  completePut(complete);
+  completePut(id);
 }
 
 //set up checkmark
@@ -100,7 +99,7 @@ function setupCheckmarks() {
   const check = document.getElementsByClassName("check");
   for (let t = 0; t < check.length; t++) {
     check[t].addEventListener("click", (event) => {
-      completeTodo(event.target.dataset.id);
+      completeWorkout(event.target.dataset.id);
     });
   }
 }
