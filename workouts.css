@@ -48,6 +48,7 @@ body {
   padding: 15px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .listItem div {
@@ -62,7 +63,10 @@ body {
   display: flex;
 }
 
-.distances div{
+.distances div, .goals div{
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
+
+

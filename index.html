@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/8ad599954f.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/8ad599954f.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
@@ -32,7 +35,7 @@
             <div class="bike"></div>
           </div>
           <div class="newWorkout">
-            <div id="form" style="display: flex">
+            <div id="newWorkoutForm" style="display: flex">
               <form class="name">
                 <select id="sports">
                   <option value="1">Run</option>
@@ -47,7 +50,9 @@
                 />
               </form>
               <form>
-                <button type="submit" id="addWorkout" class="addBtn"><i class="fas fa-plus"></i></button>
+                <button type="submit" id="addWorkout" class="addBtn">
+                  <i class="fas fa-plus"></i>
+                </button>
               </form>
             </div>
           </div>
@@ -56,8 +61,21 @@
       <div class="sectionTwo">
         <div class="box two">
           <h1 class="header uppercase center">Goals</h1>
-          <div class="newWorkout">
-            <div id="form" style="display: flex">
+          <div class="goals">
+          <div>
+            <i class="fas fa-running"></i>
+            <p id="run-goal"></p>
+          </div>
+          <div>
+            <i class="fas fa-swimmer"></i>
+            <p id="swim-goal"></p>
+          </div>
+          <div>
+            <i class="fas fa-biking"></i>
+            <p id="bike-goal"></p>
+          </div>
+          <div>
+            <div id="newGoalForm" style="display: flex">
               <form class="name">
                 <select id="goal-sports">
                   <option value="1">Run</option>
@@ -75,14 +93,23 @@
               </form>
             </div>
           </div>
-          <div></div>
         </div>
+      </div>
         <div class="box three">
           <h1 class="header uppercase center">Distances</h1>
           <div class="distances">
-          <div><p>Run</p><p id="run-distance"></p></div>
-          <div><p>Swim</p><p id="swim-distance"></p></div>
-          <div><p>Bike</p><p id="bike-distance"></p></div>
+            <div>
+              <i class="fas fa-running"></i>
+              <p id="run-distance"></p>
+            </div>
+            <div>
+              <i class="fas fa-swimmer"></i>
+              <p id="swim-distance"></p>
+            </div>
+            <div>
+              <i class="fas fa-biking"></i>
+              <p id="bike-distance"></p>
+            </div>
           </div>
         </div>
         <div class="box four">

@@ -7,11 +7,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const workoutRoutes = require("./routes/workouts");
+const goalsRoutes = require("./routes/goals")
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/workouts", workoutRoutes);
+app.use("/goals", goalsRoutes)
 app.use(express.static("src"));
 
 mongoose.connect(
