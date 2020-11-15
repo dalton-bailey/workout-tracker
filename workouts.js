@@ -36,7 +36,10 @@ async function deleteWorkout(id) {
 //complete fetch
 async function completePut(id) {
   let response = await fetch(api + "/" + id, {
-    method: "PUT"
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 }
 
@@ -84,7 +87,6 @@ function setupDeleteButtons() {
 
 function completeTodo(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
-  
   console.log(index);
   const complete = {
     complete: true,
