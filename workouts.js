@@ -87,11 +87,12 @@ function setupDeleteButtons() {
 
 function completeWorkout(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
-  console.log(index);
+  workouts[index]['complete'] = !workouts[index]['complete']
+  console.log(workouts, index);
   const complete = {
     complete: true,
-  };
-  completePut(id);
+  }
+  completePut(id, complete);
 }
 
 //set up checkmark
@@ -122,7 +123,7 @@ function distances() {
   let swimTotal = swimWorkoutList.reduce((acc, curr) => acc + curr.distance, 0);
   let bikeTotal = bikeWorkoutList.reduce((acc, curr) => acc + curr.distance, 0);
 
-  console.log(runTotal, swimTotal, bikeTotal);
+  // console.log(runTotal, swimTotal, bikeTotal);
 
   runDistance.innerHTML = runTotal + " total miles"
   swimDistance.innerHTML = swimTotal + " total miles"
