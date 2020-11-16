@@ -1,4 +1,5 @@
 const api = "https://gentle-spire-21312.herokuapp.com/workouts";
+// const goalsApi = "https://gentle-spire-21312.herokuapp.com/goals"
 // const api = "http://localhost:3000/workouts";
 let workouts = [];
 let goals = []
@@ -15,7 +16,7 @@ async function fetchWorkouts() {
 
 //fetch goals 
 async function fetchGoals() {
-  let response = await fetch(api)
+  let response = await fetch(api + "/goals")
   let fetchedGoals = await response.json()
 
   console.log(fetchedGoals)
@@ -36,7 +37,7 @@ async function postWorkout(data) {
 
 //post goal
 async function postGoal(data) {
-  let response = await fetch(api, {
+  let response = await fetch(api + "/goals", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -96,7 +97,9 @@ function addGoalToArray(s, d) {
 
   goals.push(goalData)
 
-  
+  console.log("goals", goals)
+
+
 }
 
 //splice workout for user interface

@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use("/workouts", workoutRoutes);
 app.use("/goals", goalsRoutes)
+
 app.use(express.static("src"));
 
 mongoose.connect(
