@@ -37,6 +37,7 @@ router.post("/", (req, res) => {
     });
 });
 
+
 router.delete("/:id", (req, res) => {
   Workouts.deleteOne({ _id: req.params.id }, (err, workouts) => {
     if (err) console.log(err);

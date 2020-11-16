@@ -99,7 +99,6 @@ function addGoalToArray(s, d) {
 
   console.log("goals", goals)
 
-
 }
 
 //splice workout for user interface

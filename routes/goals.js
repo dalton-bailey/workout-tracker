@@ -18,9 +18,9 @@ router.get("/", (req, res, next) => {
 
 router.post("/", (req, res) => {
   Goals.create({
-    complete: req.params.complete,
-    sport: req.params.sport,
-    distance: req.params.distance,
+    complete: req.body.complete,
+    sport: req.body.sport,
+    distance: req.body.distance,
   })
     .then((goals) => {
       res.json(goals);
@@ -34,6 +34,7 @@ router.post("/", (req, res) => {
       });
     });
 });
+
 
 // router.delete("/:id", (req, res) => {
 //   Goals.deleteOne({ _id: req.params.id }, (err, goals) => {
