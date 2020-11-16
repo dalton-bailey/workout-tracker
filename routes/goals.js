@@ -18,9 +18,9 @@ router.get("/", (req, res, next) => {
 
 router.post("/", (req, res) => {
   Goals.create({
-    complete: req.body.complete,
-    sport: req.body.sport,
-    distance: req.body.distance,
+    complete: req.params.complete,
+    sport: req.params.sport,
+    distance: req.params.distance,
   })
     .then((goals) => {
       res.json(goals);
