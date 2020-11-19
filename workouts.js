@@ -9,7 +9,7 @@ async function fetchWorkouts() {
   let response = await fetch(api);
   let fetchedWorkouts = await response.json();
 
-  console.log(fetchedWorkouts);
+  // console.log(fetchedWorkouts);
 
   return fetchedWorkouts;
 }
@@ -19,7 +19,7 @@ async function fetchGoals() {
   let response = await fetch(goalsApi);
   let fetchedGoals = await response.json();
 
-  console.log(fetchedGoals);
+  // console.log("goals",fetchedGoals);
 
   return fetchedGoals;
 }
@@ -36,10 +36,10 @@ async function postWorkout(data) {
 }
 
 //post goal
-async function postGoal(data) {
+async function postGoal(goalData) {
   let response = await fetch(goalsApi, {
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify(goalData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -82,7 +82,7 @@ function addWorkoutToArray(t, d, s) {
 
   displayWorkouts();
 
-  console.log("all workouts", workouts);
+  // console.log("all workouts", workouts);
 }
 
 //push new goal to goals array
@@ -97,12 +97,14 @@ function addGoalToArray(s, d) {
 
   goals.push(goalData);
 
+  displayGoals()
+
   console.log("goals", goals);
 }
 
 //splice workout for user interface
 function spliceWorkout(id) {
-  console.log(workouts, id);
+  // console.log(workouts, id);
   const index = workouts.findIndex((workout) => workout._id == id);
   deleteWorkout(id);
   workouts.splice(index, 1);
@@ -126,7 +128,7 @@ function setupDeleteButtons() {
 function completeWorkout(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
   complete = workouts[index]["complete"] = !workouts[index]["complete"];
-  console.log(workouts, index, complete);
+  // console.log(workouts, index, complete);
   completePut(id, complete);
 }
 
@@ -171,35 +173,6 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
-function addGoals(sport, distance) {
-  const runGoal = document.getElementById("run-goal");
-  runGoal.innerHTML = "";
-
-  const swimGoal = document.getElementById("swim-goal");
-  swimGoal.innerHTML = "";
-
-  const bikeGoal = document.getElementById("bike-goal");
-  bikeGoal.innerHTML = "";
-
-  let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
-  let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
-  let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
-
-  let runTotal = runWorkoutList
-    .reduce((acc, curr) => acc + curr.distance, 0)
-    .toFixed(2);
-  let swimTotal = swimWorkoutList
-    .reduce((acc, curr) => acc + curr.distance, 0)
-    .toFixed(2);
-  let bikeTotal = bikeWorkoutList
-    .reduce((acc, curr) => acc + curr.distance, 0)
-    .toFixed(2);
-
-  runGoal.innerHTML = runTotal + "/" + distance;
-  swimGoal.innerHTML = swimTotal + "/" + distance;
-  bikeGoal.innerHTML = bikeTotal + "/" + distance;
-}
-
 //add workout
 function displayWorkouts() {
   const runList = document.querySelector(".run");
@@ -224,7 +197,31 @@ function displayWorkouts() {
   distances();
 }
 
-//display workouts
+
+//add goals
+function displayGoals() {
+  const runGoal = document.getElementById("run-goal");
+  runGoal.innerHTML = "";
+
+  const swimGoal = document.getElementById("swim-goal");
+  swimGoal.innerHTML = "";
+
+  const bikeGoal = document.getElementById("bike-goal");
+  bikeGoal.innerHTML = "";
+
+  let runGoalsList = goals.filter((goal) => goal.sport === "Run");
+  let swimGoalsList = goals.filter((goal) => goal.sport === "Swim");
+  let bikeGoalsList = workouts.filter((goal) => goal.sport === "Bike");
+
+  console.log(runGoalsList)
+
+  runGoalsList.forEach((goal) => createGoalContent(goal))
+  swimGoalsList.forEach((goal) => createGoalContent(goal))
+  bikeGoalsList.forEach((goal) => createGoalContent(goal))
+  
+}
+
+//workouts content
 function createWorkoutContent(workout) {
   const runList = document.querySelector(".run");
   const swimList = document.querySelector(".swim");
@@ -257,12 +254,48 @@ function createWorkoutContent(workout) {
   }
 }
 
+//goals content
+function createGoalContent(goal) {
+  const runGoal = document.getElementById("run-goal");
+  const swimGoal = document.getElementById("swim-goal");
+  const bikeGoal = document.getElementById("bike-goal");
+
+  let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
+  let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
+  let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
+
+  let runTotal = runWorkoutList
+  .reduce((acc, curr) => acc + curr.distance, 0)
+  .toFixed(2);
+let swimTotal = swimWorkoutList
+  .reduce((acc, curr) => acc + curr.distance, 0)
+  .toFixed(2);
+let bikeTotal = bikeWorkoutList
+  .reduce((acc, curr) => acc + curr.distance, 0)
+  .toFixed(2);
+
+  console.log(goal.distance)
+
+  if (goal.sport === "Run") {
+    runGoal.innerHTML = runTotal + "/" + goal.distance;
+  } else if (goal.sport === "Swim") {
+    swimGoal.innerHTML = swimTotal + "/" + goal.distance;
+  } else if (goal.sport === "Bike") {
+    bikeGoal.innerHTML = bikeTotal + "/" + goal.distance;
+  }
+
+}
+
 async function main() {
   const fetchedWorkouts = await fetchWorkouts();
+  const fetchedGoals = await fetchGoals()
   workouts = fetchedWorkouts;
+  goals = fetchedGoals
   displayWorkouts();
+  displayGoals()
 
   console.log(workouts);
+  console.log(goals)
 
   const newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
@@ -300,7 +333,7 @@ async function main() {
     if (goalDistance === "") {
       alert("please input a goal distance");
     } else {
-      addGoals(goalSport, goalDistance);
+      // addGoals(goalSport, goalDistance);
       addGoalToArray(goalSport, goalDistance);
     }
   });
