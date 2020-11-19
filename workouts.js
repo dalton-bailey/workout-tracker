@@ -211,9 +211,7 @@ function displayGoals() {
 
   let runGoalsList = goals.filter((goal) => goal.sport === "Run");
   let swimGoalsList = goals.filter((goal) => goal.sport === "Swim");
-  let bikeGoalsList = workouts.filter((goal) => goal.sport === "Bike");
-
-  console.log(runGoalsList)
+  let bikeGoalsList = goals.filter((goal) => goal.sport === "Bike");
 
   runGoalsList.forEach((goal) => createGoalContent(goal))
   swimGoalsList.forEach((goal) => createGoalContent(goal))
@@ -274,7 +272,6 @@ let bikeTotal = bikeWorkoutList
   .reduce((acc, curr) => acc + curr.distance, 0)
   .toFixed(2);
 
-  console.log(goal.distance)
 
   if (goal.sport === "Run") {
     runGoal.innerHTML = runTotal + "/" + goal.distance;
