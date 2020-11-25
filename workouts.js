@@ -81,6 +81,8 @@ function addWorkoutToArray(t, d, s) {
 
   workouts.push(workoutData);
 
+  saveWorkout(workoutData)
+
   displayWorkouts();
 
   // console.log("all workouts", workouts);
@@ -98,7 +100,7 @@ function addGoalToArray(s, d) {
 
   goals.push(goalData);
 
-  displayGoals()
+  displayGoals();
 
   console.log("goals", goals);
 }
@@ -107,23 +109,11 @@ function addGoalToArray(s, d) {
 function spliceWorkout(id) {
   // console.log(workouts, id);
   const index = workouts.findIndex((workout) => workout._id == id);
-  deleteWorkout(id);
+  // deleteWorkout(id);
   workouts.splice(index, 1);
   displayWorkouts();
-
+  deleteWorkout(id);
   console.log(index);
-}
-
-//delete workouts
-function setupDeleteButtons() {
-  const close = document.getElementsByClassName("close");
-  for (let t = 0; t < close.length; t++) {
-    close[t].addEventListener("click", (event) => {
-      spliceWorkout(event.target.dataset.id);
-      // let id = event.target.dataset.id;
-      // console.log(id, workouts);
-    });
-  }
 }
 
 //complete workout
@@ -136,30 +126,30 @@ function completeWorkout(id) {
 
 //edit workout
 function editWorkout(elem, id) {
-  elem.querySelector(".distance").disabled = false
-  elem.querySelector(".time").disabled = false
+  elem.querySelector(".distance").disabled = false;
+  elem.querySelector(".time").disabled = false;
 
-  const editButton = document.querySelector(".editButton")
-  editButton.style.display = "none"
+  // const editButton = document.querySelector(".editButton");
+  // editButton.style.display = "none";
 
-  const saveButton = document.querySelector(".saveButton")
-  saveButton.style.display = "block"
+  // const saveButton = document.querySelector(".saveButton");
+  // saveButton.style.display = "block";
 
-  console.log(id)
+  console.log(id);
 }
 
-//save workout 
-function saveWorkout(elem, id) {
-  elem.querySelector(".distance").disabled = true
-  elem.querySelector(".time").disabled = true
+//save workout
+function saveWorkout(elem, id, data) {
+  elem.querySelector(".distance").disabled = true;
+  elem.querySelector(".time").disabled = true;
 
-  const editButton = document.querySelector(".editButton")
-  editButton.style.display = "block"
+  // const editButton = document.querySelector(".editButton");
+  // editButton.style.display = "block";
 
-  const saveButton = document.querySelector(".saveButton")
-  saveButton.style.display = "none"
+  // const saveButton = document.querySelector(".saveButton");
+  // saveButton.style.display = "none";
 
-  // updateWorkout(id)
+  updateWorkout(id, data);
 }
 
 function distances() {
@@ -212,11 +202,8 @@ function displayWorkouts() {
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
 
-
-  setupDeleteButtons();
   distances();
 }
-
 
 //add goals
 function displayGoals() {
@@ -232,12 +219,10 @@ function displayGoals() {
   let runGoalsList = goals.filter((goal) => goal.sport === "Run");
   let swimGoalsList = goals.filter((goal) => goal.sport === "Swim");
   let bikeGoalsList = goals.filter((goal) => goal.sport === "Bike");
-  
 
-  runGoalsList.forEach((goal) => createGoalContent(goal))
-  swimGoalsList.forEach((goal) => createGoalContent(goal))
-  bikeGoalsList.forEach((goal) => createGoalContent(goal))
-  
+  runGoalsList.forEach((goal) => createGoalContent(goal));
+  swimGoalsList.forEach((goal) => createGoalContent(goal));
+  bikeGoalsList.forEach((goal) => createGoalContent(goal));
 }
 
 //workouts content
@@ -255,39 +240,48 @@ function createWorkoutContent(workout) {
   check.className = "check";
   check.id = "check";
   check.checked = workout.complete;
-  check.addEventListener('click', () => {
+  check.addEventListener("click", () => {
     completeWorkout(workout._id);
-  })
+  });
+
+  const close = document.createElement("button");
+  close.dataset.id = workout._id;
+  check.className = "close";
+  close.innerHTML = `<i class="far fa-trash-alt"></i>`;
+  close.addEventListener("click", () => {
+    deleteWorkout(workout._id);
+    spliceWorkout(workout._id);
+  });
 
   const edit = document.createElement("button");
-  edit.dataset.id = workout._id
-  edit.className = "editButton"
-  edit.innerHTML = `<i class="far fa-edit"></i>`
+  edit.dataset.id = workout._id;
+  edit.className = "editButton";
+  edit.innerHTML = `<i class="far fa-edit"></i>`;
 
-  const save = document.createElement("button")
-  save.dataset.id = workout._id
-  save.className = "saveButton"
-  save.innerHTML = `<i class="far fa-save"></i>`
-  save.style.display = "none"
+  const save = document.createElement("button");
+  save.dataset.id = workout._id;
+  save.className = "saveButton";
+  save.innerHTML = `<i class="far fa-save"></i>`;
+  // save.style.display = "none"
 
   edit.addEventListener("click", () => {
-    editWorkout(workoutItem, workout._id)
-  })
+    editWorkout(workoutItem, workout._id);
+  });
 
   save.addEventListener("click", () => {
-    saveWorkout(workoutItem, workout._id)
-  })
+    saveWorkout(workoutItem, workout._id);
+  });
 
   workoutItem.innerHTML = `
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance} miles" disabled> </div> 
   <div> <p>Time </p> <input class="time" type="text" value="${workout.time} minutes" disabled> </p>  </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
-  <button data-id="${workout._id}" class="close"> <i class="far fa-trash-alt"></i> </button>
   `;
 
   workoutItem.prepend(check);
-  workoutItem.appendChild(edit)
-  workoutItem.appendChild(save)
+  workoutItem.appendChild(close);
+  workoutItem.appendChild(edit);
+  workoutItem.appendChild(save);
 
   if (workout.sport === "Run") {
     runList.appendChild(workoutItem);
@@ -297,7 +291,6 @@ function createWorkoutContent(workout) {
     bikeList.appendChild(workoutItem);
   }
 }
-
 
 //goals content
 function createGoalContent(goal) {
@@ -310,15 +303,14 @@ function createGoalContent(goal) {
   let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
 
   let runTotal = runWorkoutList
-  .reduce((acc, curr) => acc + curr.distance, 0)
-  .toFixed(2);
-let swimTotal = swimWorkoutList
-  .reduce((acc, curr) => acc + curr.distance, 0)
-  .toFixed(2);
-let bikeTotal = bikeWorkoutList
-  .reduce((acc, curr) => acc + curr.distance, 0)
-  .toFixed(2);
-
+    .reduce((acc, curr) => acc + curr.distance, 0)
+    .toFixed(2);
+  let swimTotal = swimWorkoutList
+    .reduce((acc, curr) => acc + curr.distance, 0)
+    .toFixed(2);
+  let bikeTotal = bikeWorkoutList
+    .reduce((acc, curr) => acc + curr.distance, 0)
+    .toFixed(2);
 
   if (goal.sport === "Run") {
     runGoal.innerHTML = runTotal + "/" + goal.distance;
@@ -327,20 +319,18 @@ let bikeTotal = bikeWorkoutList
   } else if (goal.sport === "Bike") {
     bikeGoal.innerHTML = bikeTotal + "/" + goal.distance;
   }
-
 }
-
 
 async function main() {
   const fetchedWorkouts = await fetchWorkouts();
-  const fetchedGoals = await fetchGoals()
+  const fetchedGoals = await fetchGoals();
   workouts = fetchedWorkouts;
-  goals = fetchedGoals
+  goals = fetchedGoals;
   displayWorkouts();
-  displayGoals()
+  displayGoals();
 
   console.log(workouts);
-  console.log(goals)
+  console.log(goals);
 
   const newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
