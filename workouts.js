@@ -1,3 +1,5 @@
+// const { json } = require("body-parser");
+
 const api = "https://gentle-spire-21312.herokuapp.com/workouts";
 const goalsApi = "https://gentle-spire-21312.herokuapp.com/goals";
 // const api = "http://localhost:3000/workouts";
@@ -78,12 +80,9 @@ function addWorkoutToArray(t, d, s) {
   };
 
   postWorkout(workoutData);
-
   workouts.push(workoutData);
-
-  saveWorkout(workoutData)
-
   displayWorkouts();
+
 
   // console.log("all workouts", workouts);
 }
@@ -128,11 +127,15 @@ function completeWorkout(id) {
 function editWorkout(elem, id) {
   elem.querySelector(".distance").disabled = false;
   elem.querySelector(".time").disabled = false;
+  
+  const rank = document.querySelector(".rank")
+  // console.log(rank)
+  // rank.style.display = "block"
 
-  // const editButton = document.querySelector(".editButton");
+  const editButton = document.querySelector(".editButton");
   // editButton.style.display = "none";
 
-  // const saveButton = document.querySelector(".saveButton");
+  const saveButton = document.querySelector(".saveButton");
   // saveButton.style.display = "block";
 
   console.log(id);
@@ -143,13 +146,17 @@ function saveWorkout(elem, id, data) {
   elem.querySelector(".distance").disabled = true;
   elem.querySelector(".time").disabled = true;
 
-  // const editButton = document.querySelector(".editButton");
+  const editButton = document.querySelector(".editButton");
   // editButton.style.display = "block";
 
-  // const saveButton = document.querySelector(".saveButton");
+  const saveButton = document.querySelector(".saveButton");
   // saveButton.style.display = "none";
 
+  const rank = document.querySelector(".rank")
+  // rank.style.display = "none"
+
   updateWorkout(id, data);
+  // console.log(id)
 }
 
 function distances() {
@@ -183,6 +190,14 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
+function rankings() {
+  let rankDropdown = document.querySelector(".rank")
+
+  let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
+
+  console.log(rank)
+}
+
 //add workout
 function displayWorkouts() {
   const runList = document.querySelector(".run");
@@ -201,6 +216,7 @@ function displayWorkouts() {
   runWorkoutList.forEach((workout) => createWorkoutContent(workout));
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
+
 
   distances();
 }
@@ -272,6 +288,20 @@ function createWorkoutContent(workout) {
     saveWorkout(workoutItem, workout._id);
   });
 
+  const values = ["","easy", "medium", "hard"]
+
+  const rankDropdown = document.createElement("select")
+  rankDropdown.name = "ranks"
+  rankDropdown.className = "rank"
+  // rankDropdown.style.display = "none"
+
+  values.forEach(rank => {
+    let option = document.createElement("option")
+    option.text = (rank)
+    rankDropdown.appendChild(option)
+  })
+
+
   workoutItem.innerHTML = `
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance} miles" disabled> </div> 
   <div> <p>Time </p> <input class="time" type="text" value="${workout.time} minutes" disabled> </p>  </div> 
@@ -279,6 +309,7 @@ function createWorkoutContent(workout) {
   `;
 
   workoutItem.prepend(check);
+  workoutItem.appendChild(rankDropdown)
   workoutItem.appendChild(close);
   workoutItem.appendChild(edit);
   workoutItem.appendChild(save);
@@ -328,6 +359,7 @@ async function main() {
   goals = fetchedGoals;
   displayWorkouts();
   displayGoals();
+  // editWorkout()
 
   console.log(workouts);
   console.log(goals);
@@ -336,6 +368,7 @@ async function main() {
   let sportDropdown = document.getElementById("sports");
   const newGoalForm = document.querySelector("#newGoalForm");
   let goalSportDropdown = document.getElementById("goal-sports");
+  
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -352,6 +385,7 @@ async function main() {
       alert("Please input a distance");
     } else {
       addWorkoutToArray(time, distance, sport);
+      updateWorkout(time, distance, sport)
     }
   });
 
