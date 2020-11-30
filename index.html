@@ -37,17 +37,16 @@
           <div class="newWorkout">
             <div id="newWorkoutForm" style="display: flex">
               <form class="name">
+                <label for="sports">Sport</label>
                 <select id="sports">
                   <option value="1">Run</option>
                   <option value="2">Swim</option>
                   <option value="3">Bike</option>
                 </select>
+                <label for="workoutTime">Time</label>
                 <input type="text" id="workoutTime" placeholder="Time" />
-                <input
-                  type="text"
-                  id="workoutDistance"
-                  placeholder="Distance"
-                />
+                <label for="workoutDistance">Distance</label>
+                <input type="text" id="workoutDistance" placeholder="Distance" />
               </form>
               <form>
                 <button type="submit" id="addWorkout" class="addBtn">

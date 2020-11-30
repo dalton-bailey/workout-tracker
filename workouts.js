@@ -83,7 +83,6 @@ function addWorkoutToArray(t, d, s) {
   workouts.push(workoutData);
   displayWorkouts();
 
-
   // console.log("all workouts", workouts);
 }
 
@@ -127,36 +126,48 @@ function completeWorkout(id) {
 function editWorkout(elem, id) {
   elem.querySelector(".distance").disabled = false;
   elem.querySelector(".time").disabled = false;
-  
-  const rank = document.querySelector(".rank")
-  // console.log(rank)
-  // rank.style.display = "block"
+  elem.querySelector(".rank").disabled = false
 
-  const editButton = document.querySelector(".editButton");
-  // editButton.style.display = "none";
+  const rank = elem.querySelector(".rank");
+  rank.style.display = "block"
 
-  const saveButton = document.querySelector(".saveButton");
-  // saveButton.style.display = "block";
+  const editButton = elem.querySelector(".editButton");
+  editButton.style.display = "none";
+
+  const saveButton = elem.querySelector(".saveButton");
+  saveButton.style.display = "block";
 
   console.log(id);
 }
 
 //save workout
-function saveWorkout(elem, id, data) {
+function saveWorkout(elem, id) {
   elem.querySelector(".distance").disabled = true;
   elem.querySelector(".time").disabled = true;
+  elem.querySelector(".rank").disabled = true;
 
-  const editButton = document.querySelector(".editButton");
-  // editButton.style.display = "block";
+  let updateT = elem.querySelector(".time").value;
 
-  const saveButton = document.querySelector(".saveButton");
-  // saveButton.style.display = "none";
+  let updateD = Number(elem.querySelector(".distance").value);
+  
+  const data = {
+    distance: updateD,
+    time: updateT,
+    pace: (updateT / updateD).toFixed(2),
 
-  const rank = document.querySelector(".rank")
-  // rank.style.display = "none"
+  }
 
+  const editButton = elem.querySelector(".editButton");
+  editButton.style.display = "block";
+
+  const saveButton = elem.querySelector(".saveButton");
+  saveButton.style.display = "none";
+
+  const rank = elem.querySelector(".rank");
+  rank.style.display = "none"
+
+  console.log(updateT, updateD)
   updateWorkout(id, data);
-  // console.log(id)
 }
 
 function distances() {
@@ -191,11 +202,11 @@ function distances() {
 }
 
 function rankings() {
-  let rankDropdown = document.querySelector(".rank")
+  let rankDropdown = document.querySelector(".rank");
 
   let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
 
-  console.log(rank)
+  console.log(rank);
 }
 
 //add workout
@@ -216,7 +227,6 @@ function displayWorkouts() {
   runWorkoutList.forEach((workout) => createWorkoutContent(workout));
   swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
   bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
-
 
   distances();
 }
@@ -278,7 +288,21 @@ function createWorkoutContent(workout) {
   save.dataset.id = workout._id;
   save.className = "saveButton";
   save.innerHTML = `<i class="far fa-save"></i>`;
-  // save.style.display = "none"
+  save.style.display = "none"
+
+  const values = ["", "easy", "medium", "hard"];
+
+  const rankDropdown = document.createElement("select");
+  rankDropdown.name = "ranks";
+  rankDropdown.className = "rank";
+  rankDropdown.style.display = "none"
+  rankDropdown.disabled = "true"
+
+  values.forEach((rank) => {
+    let option = document.createElement("option");
+    option.text = rank;
+    rankDropdown.appendChild(option);
+  });
 
   edit.addEventListener("click", () => {
     editWorkout(workoutItem, workout._id);
@@ -286,30 +310,18 @@ function createWorkoutContent(workout) {
 
   save.addEventListener("click", () => {
     saveWorkout(workoutItem, workout._id);
+    rankings()
   });
-
-  const values = ["","easy", "medium", "hard"]
-
-  const rankDropdown = document.createElement("select")
-  rankDropdown.name = "ranks"
-  rankDropdown.className = "rank"
-  // rankDropdown.style.display = "none"
-
-  values.forEach(rank => {
-    let option = document.createElement("option")
-    option.text = (rank)
-    rankDropdown.appendChild(option)
-  })
 
 
   workoutItem.innerHTML = `
-  <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance} miles" disabled> </div> 
-  <div> <p>Time </p> <input class="time" type="text" value="${workout.time} minutes" disabled> </p>  </div> 
+  <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
+  <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </p>  </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
   `;
 
   workoutItem.prepend(check);
-  workoutItem.appendChild(rankDropdown)
+  workoutItem.appendChild(rankDropdown);
   workoutItem.appendChild(close);
   workoutItem.appendChild(edit);
   workoutItem.appendChild(save);
@@ -359,7 +371,6 @@ async function main() {
   goals = fetchedGoals;
   displayWorkouts();
   displayGoals();
-  // editWorkout()
 
   console.log(workouts);
   console.log(goals);
@@ -368,7 +379,6 @@ async function main() {
   let sportDropdown = document.getElementById("sports");
   const newGoalForm = document.querySelector("#newGoalForm");
   let goalSportDropdown = document.getElementById("goal-sports");
-  
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -385,15 +395,14 @@ async function main() {
       alert("Please input a distance");
     } else {
       addWorkoutToArray(time, distance, sport);
-      updateWorkout(time, distance, sport)
+      updateWorkout(time, distance, sport);
     }
   });
 
   //event listener to get new goal data
   newGoalForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    let goalSport =
-      goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
+    let goalSport = goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
 
     let goalDistance = Number(document.getElementById("gotalDistance").value);
 

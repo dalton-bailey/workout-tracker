@@ -51,24 +51,7 @@ router.delete("/:id", (req, res) => {
 
 router.put("/:id", async (req, res) => {
   await Workouts.updateOne({_id: req.params.id}, req.body);
-  // Workouts.findByIdAndUpdate(req.params.id, { new: true }, (err, workouts) => {
-  //   workouts.complete = !workouts.complete;
 
-  //   Workouts.updateOne(req.query, (err, workouts) => {
-  //     console.log(workouts);
-
-  //     if (err) {
-  //       console.log(err);
-  //     }
-
-  //     Workouts.find((err, workouts) => {
-  //       if (err) {
-  //         console.log(err);
-  //       }
-  //       res.json(workouts);
-  //     });
-  //   });
-  // });
 });
 
 module.exports = router;
