@@ -1,11 +1,6 @@
-// const { json } = require("body-parser");
-
 const api = "https://gentle-spire-21312.herokuapp.com/workouts";
-const goalsApi = "https://gentle-spire-21312.herokuapp.com/goals";
 // const api = "http://localhost:3000/workouts";
-// const goalsApi = "http://localhost:3000/goals"
 let workouts = [];
-let goals = [];
 
 //fetch workouts
 async function fetchWorkouts() {
@@ -17,32 +12,11 @@ async function fetchWorkouts() {
   return fetchedWorkouts;
 }
 
-//fetch goals
-async function fetchGoals() {
-  let response = await fetch(goalsApi);
-  let fetchedGoals = await response.json();
-
-  // console.log("goals",fetchedGoals);
-
-  return fetchedGoals;
-}
-
 //post workout
 async function postWorkout(data) {
   let response = await fetch(api, {
     method: "POST",
     body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
-
-//post goal
-async function postGoal(goalData) {
-  let response = await fetch(goalsApi, {
-    method: "POST",
-    body: JSON.stringify(goalData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -86,23 +60,6 @@ function addWorkoutToArray(t, d, s) {
   // console.log("all workouts", workouts);
 }
 
-//push new goal to goals array
-function addGoalToArray(s, d) {
-  const goalData = {
-    complete: false,
-    sport: s,
-    distance: d,
-  };
-
-  postGoal(goalData);
-
-  goals.push(goalData);
-
-  displayGoals();
-
-  console.log("goals", goals);
-}
-
 //splice workout for user interface
 function spliceWorkout(id) {
   // console.log(workouts, id);
@@ -126,10 +83,10 @@ function completeWorkout(id) {
 function editWorkout(elem, id) {
   elem.querySelector(".distance").disabled = false;
   elem.querySelector(".time").disabled = false;
-  elem.querySelector(".rank").disabled = false
+  elem.querySelector(".rank").disabled = false;
 
   const rank = elem.querySelector(".rank");
-  rank.style.display = "block"
+  rank.style.display = "block";
 
   const editButton = elem.querySelector(".editButton");
   editButton.style.display = "none";
@@ -149,13 +106,12 @@ function saveWorkout(elem, id) {
   let updateT = elem.querySelector(".time").value;
 
   let updateD = Number(elem.querySelector(".distance").value);
-  
+
   const data = {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
-
-  }
+  };
 
   const editButton = elem.querySelector(".editButton");
   editButton.style.display = "block";
@@ -164,9 +120,9 @@ function saveWorkout(elem, id) {
   saveButton.style.display = "none";
 
   const rank = elem.querySelector(".rank");
-  rank.style.display = "none"
+  rank.style.display = "none";
 
-  console.log(updateT, updateD)
+  console.log(updateT, updateD);
   updateWorkout(id, data);
 }
 
@@ -224,31 +180,9 @@ function displayWorkouts() {
   let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
   let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
 
-  runWorkoutList.forEach((workout) => createWorkoutContent(workout));
-  swimWorkoutList.forEach((workout) => createWorkoutContent(workout));
-  bikeWorkoutList.forEach((workout) => createWorkoutContent(workout));
+  workouts.forEach((workout) => createWorkoutContent(workout));
 
   distances();
-}
-
-//add goals
-function displayGoals() {
-  const runGoal = document.getElementById("run-goal");
-  runGoal.innerHTML = "";
-
-  const swimGoal = document.getElementById("swim-goal");
-  swimGoal.innerHTML = "";
-
-  const bikeGoal = document.getElementById("bike-goal");
-  bikeGoal.innerHTML = "";
-
-  let runGoalsList = goals.filter((goal) => goal.sport === "Run");
-  let swimGoalsList = goals.filter((goal) => goal.sport === "Swim");
-  let bikeGoalsList = goals.filter((goal) => goal.sport === "Bike");
-
-  runGoalsList.forEach((goal) => createGoalContent(goal));
-  swimGoalsList.forEach((goal) => createGoalContent(goal));
-  bikeGoalsList.forEach((goal) => createGoalContent(goal));
 }
 
 //workouts content
@@ -272,7 +206,7 @@ function createWorkoutContent(workout) {
 
   const close = document.createElement("button");
   close.dataset.id = workout._id;
-  check.className = "close";
+  close.className = "close";
   close.innerHTML = `<i class="far fa-trash-alt"></i>`;
   close.addEventListener("click", () => {
     deleteWorkout(workout._id);
@@ -288,15 +222,15 @@ function createWorkoutContent(workout) {
   save.dataset.id = workout._id;
   save.className = "saveButton";
   save.innerHTML = `<i class="far fa-save"></i>`;
-  save.style.display = "none"
+  save.style.display = "none";
 
   const values = ["", "easy", "medium", "hard"];
 
   const rankDropdown = document.createElement("select");
   rankDropdown.name = "ranks";
   rankDropdown.className = "rank";
-  rankDropdown.style.display = "none"
-  rankDropdown.disabled = "true"
+  rankDropdown.style.display = "none";
+  rankDropdown.disabled = "true";
 
   values.forEach((rank) => {
     let option = document.createElement("option");
@@ -310,9 +244,8 @@ function createWorkoutContent(workout) {
 
   save.addEventListener("click", () => {
     saveWorkout(workoutItem, workout._id);
-    rankings()
+    rankings();
   });
-
 
   workoutItem.innerHTML = `
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
@@ -335,50 +268,15 @@ function createWorkoutContent(workout) {
   }
 }
 
-//goals content
-function createGoalContent(goal) {
-  const runGoal = document.getElementById("run-goal");
-  const swimGoal = document.getElementById("swim-goal");
-  const bikeGoal = document.getElementById("bike-goal");
-
-  let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
-  let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
-  let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
-
-  let runTotal = runWorkoutList
-    .reduce((acc, curr) => acc + curr.distance, 0)
-    .toFixed(2);
-  let swimTotal = swimWorkoutList
-    .reduce((acc, curr) => acc + curr.distance, 0)
-    .toFixed(2);
-  let bikeTotal = bikeWorkoutList
-    .reduce((acc, curr) => acc + curr.distance, 0)
-    .toFixed(2);
-
-  if (goal.sport === "Run") {
-    runGoal.innerHTML = runTotal + "/" + goal.distance;
-  } else if (goal.sport === "Swim") {
-    swimGoal.innerHTML = swimTotal + "/" + goal.distance;
-  } else if (goal.sport === "Bike") {
-    bikeGoal.innerHTML = bikeTotal + "/" + goal.distance;
-  }
-}
-
 async function main() {
   const fetchedWorkouts = await fetchWorkouts();
-  const fetchedGoals = await fetchGoals();
   workouts = fetchedWorkouts;
-  goals = fetchedGoals;
   displayWorkouts();
-  displayGoals();
 
   console.log(workouts);
-  console.log(goals);
 
   const newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  const newGoalForm = document.querySelector("#newGoalForm");
-  let goalSportDropdown = document.getElementById("goal-sports");
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -396,23 +294,6 @@ async function main() {
     } else {
       addWorkoutToArray(time, distance, sport);
       updateWorkout(time, distance, sport);
-    }
-  });
-
-  //event listener to get new goal data
-  newGoalForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    let goalSport = goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
-
-    let goalDistance = Number(document.getElementById("gotalDistance").value);
-
-    console.log(goalSport, goalDistance);
-
-    if (goalDistance === "") {
-      alert("please input a goal distance");
-    } else {
-      // addGoals(goalSport, goalDistance);
-      addGoalToArray(goalSport, goalDistance);
     }
   });
 }
