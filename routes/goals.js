@@ -47,25 +47,9 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-// router.put("/:id", (req, res) => {
-//   Goals.findByIdAndUpdate(req.params.id, { new: true }, (err, goals) => {
-//     goals.complete = !goals.complete;
+router.put("/:id", async (req, res) => {
+  await Goals.updateOne({_id: req.params.id}, req.body);
 
-//     Goals.updateOne(req.query, (err, goals) => {
-//       console.log(goals);
-
-//       if (err) {
-//         console.log(err);
-//       }
-
-//       Goals.find((err, goals) => {
-//         if (err) {
-//           console.log(err);
-//         }
-//         res.json(goals);
-//       });
-//     });
-//   });
-// });
+});
 
 module.exports = router;

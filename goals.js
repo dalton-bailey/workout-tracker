@@ -25,12 +25,23 @@ async function postGoal(goalData) {
 
 //delete goal
 async function deleteGoal(id) {
-    let response = await fetch(goalsApi + "/" + id, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        }
-    })
+  let response = await fetch(goalsApi + "/" + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+//update goal
+async function updateGoal(id, goal) {
+  let response = await fetch(goalsApi + "/" + id, {
+    method: "PUT",
+    body: JSON.stringify(goal),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 //push new workout to workouts array
@@ -68,11 +79,44 @@ function addGoalToArray(s, d) {
 }
 
 function spliceGoal(id) {
-    const index = goals.findIndex((goal) => goal._id == id)
-    goals.splice(index, 1)
-    displayGoals()
-    deleteGoal(id)
-    console.log(index)
+  const index = goals.findIndex((goal) => goal._id == id);
+  goals.splice(index, 1);
+  displayGoals();
+  deleteGoal(id);
+  console.log(index);
+}
+
+//edit workout
+function editGoal(elem, id) {
+  elem.querySelector(".goalDistance").disabled = false;
+
+  const editButton = elem.querySelector(".editButton");
+  editButton.style.display = "none";
+
+  const saveButton = elem.querySelector(".saveButton");
+  saveButton.style.display = "block";
+
+  console.log(id);
+}
+
+//save workout
+function saveGoal(elem, id) {
+  elem.querySelector(".goalDistance").disabled = true;
+
+  let updateD = Number(document.getElementById("gotalDistance").value);
+
+  const data = {
+    distance: updateD,
+  };
+
+  const editButton = elem.querySelector(".editButton");
+  editButton.style.display = "block";
+
+  const saveButton = elem.querySelector(".saveButton");
+  saveButton.style.display = "none";
+
+  console.log(updateD);
+  updateGoal(id, data);
 }
 
 //add goals
@@ -125,7 +169,17 @@ function createRunGoalContent(goal) {
   save.innerHTML = `<i class="far fa-save"></i>`;
   save.style.display = "none";
 
-  runGoal.innerHTML = runTotal + "/" + goal.distance;
+  edit.addEventListener("click", () => {
+    editGoal(runGoal, goal._id);
+  });
+
+  save.addEventListener("click", () => {
+    saveGoal(runGoal, goal._id);
+  });
+
+  //   runGoal.innerHTML = runTotal + "/" + goal.distance;
+
+  runGoal.innerHTML = `<div><p> ${runTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
 
   runGoal.appendChild(close);
   runGoal.appendChild(edit);

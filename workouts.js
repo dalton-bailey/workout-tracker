@@ -23,7 +23,7 @@ async function postWorkout(data) {
   });
 }
 
-//delete fetch
+//delete workout
 async function deleteWorkout(id) {
   let response = await fetch(api + "/" + id, {
     method: "DELETE",
@@ -33,6 +33,7 @@ async function deleteWorkout(id) {
   });
 }
 
+//update workout
 async function updateWorkout(id, workout) {
   let response = await fetch(api + "/" + id, {
     method: "PUT",
@@ -176,10 +177,6 @@ function displayWorkouts() {
   const bikeList = document.querySelector(".bike");
   bikeList.innerHTML = "";
 
-  let runWorkoutList = workouts.filter((workout) => workout.sport === "Run");
-  let swimWorkoutList = workouts.filter((workout) => workout.sport === "Swim");
-  let bikeWorkoutList = workouts.filter((workout) => workout.sport === "Bike");
-
   workouts.forEach((workout) => createWorkoutContent(workout));
 
   distances();
@@ -249,7 +246,7 @@ function createWorkoutContent(workout) {
 
   workoutItem.innerHTML = `
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
-  <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </p>  </div> 
+  <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
   `;
 
