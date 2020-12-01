@@ -103,7 +103,7 @@ function editGoal(elem, id) {
 function saveGoal(elem, id) {
   elem.querySelector(".goalDistance").disabled = true;
 
-  let updateD = Number(document.getElementById("gotalDistance").value);
+  let updateD = Number(elem.querySelector(".goalDistance").value);
 
   const data = {
     distance: updateD,
@@ -177,8 +177,6 @@ function createRunGoalContent(goal) {
     saveGoal(runGoal, goal._id);
   });
 
-  //   runGoal.innerHTML = runTotal + "/" + goal.distance;
-
   runGoal.innerHTML = `<div><p> ${runTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
 
   runGoal.appendChild(close);
@@ -216,7 +214,15 @@ function createSwimGoalContent(goal) {
   save.innerHTML = `<i class="far fa-save"></i>`;
   save.style.display = "none";
 
-  swimGoal.innerHTML = swimTotal + "/" + goal.distance;
+  edit.addEventListener("click", () => {
+    editGoal(swimGoal, goal._id);
+  });
+
+  save.addEventListener("click", () => {
+    saveGoal(swimGoal, goal._id);
+  });
+
+  swimGoal.innerHTML = `<div><p> ${swimTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
 
   swimGoal.appendChild(close);
   swimGoal.appendChild(edit);
@@ -253,7 +259,15 @@ function createBikeGoalContent(goal) {
   save.innerHTML = `<i class="far fa-save"></i>`;
   save.style.display = "none";
 
-  bikeGoal.innerHTML = bikeTotal + "/" + goal.distance;
+  edit.addEventListener("click", () => {
+    editGoal(bikeGoal, goal._id);
+  });
+
+  save.addEventListener("click", () => {
+    saveGoal(bikeGoal, goal._id);
+  });
+
+  bikeGoal.innerHTML = `<div><p> ${bikeTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
 
   bikeGoal.appendChild(close);
   bikeGoal.appendChild(edit);
