@@ -36,16 +36,16 @@ router.post("/", (req, res) => {
 });
 
 
-// router.delete("/:id", (req, res) => {
-//   Goals.deleteOne({ _id: req.params.id }, (err, goals) => {
-//     if (err) console.log(err);
+router.delete("/:id", (req, res) => {
+  Goals.deleteOne({ _id: req.params.id }, (err, goals) => {
+    if (err) console.log(err);
 
-//     Goals.find((err, goals) => {
-//       if (err) console.log(handleError(err));
-//       res.json(goals);
-//     });
-//   });
-// });
+    Goals.find((err, goals) => {
+      if (err) console.log(handleError(err));
+      res.json(goals);
+    });
+  });
+});
 
 // router.put("/:id", (req, res) => {
 //   Goals.findByIdAndUpdate(req.params.id, { new: true }, (err, goals) => {

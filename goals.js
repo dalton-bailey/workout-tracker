@@ -111,7 +111,7 @@ function createRunGoalContent(goal) {
   close.innerHTML = `<i class="far fa-trash-alt"></i>`;
   close.addEventListener("click", () => {
     deleteGoal(goal._id);
-    // spliceGoal(goal._id);
+    spliceGoal(goal._id);
   });
 
   const edit = document.createElement("button");
@@ -147,7 +147,7 @@ function createSwimGoalContent(goal) {
   close.className = "close";
   close.innerHTML = `<i class="far fa-trash-alt"></i>`;
   close.addEventListener("click", () => {
-    // deleteGoal(goal._id);
+    deleteGoal(goal._id);
     spliceGoal(goal._id);
   });
 
@@ -185,7 +185,7 @@ function createBikeGoalContent(goal) {
   close.innerHTML = `<i class="far fa-trash-alt"></i>`;
   close.addEventListener("click", () => {
     deleteGoal(goal._id);
-    // spliceGoal(goal._id);
+    spliceGoal(goal._id);
   });
 
   const edit = document.createElement("button");
