@@ -52,6 +52,7 @@ function addWorkoutToArray(t, d, s) {
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
+    ranking: "",
   };
 
   postWorkout(workoutData);
@@ -107,11 +108,16 @@ function saveWorkout(elem, id) {
   let updateT = elem.querySelector(".time").value;
 
   let updateD = Number(elem.querySelector(".distance").value);
+  
+  let rankDropdown = document.querySelector(".rank");
+
+  let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
 
   const data = {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
+    rank: rank
   };
 
   const editButton = elem.querySelector(".editButton");

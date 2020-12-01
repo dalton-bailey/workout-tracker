@@ -21,6 +21,9 @@ const WorkoutsSchema = new Schema({
   pace: {
     type: Number,
     required: true,
+  },
+  ranking: {
+    type: String
   }
 });
 
