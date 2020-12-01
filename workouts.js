@@ -111,13 +111,14 @@ function saveWorkout(elem, id) {
   
   let rankDropdown = document.querySelector(".rank");
 
-  let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
+  let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
+  console.log(updateR)
 
   const data = {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
-    rank: rank
+    ranking: updateR
   };
 
   const editButton = elem.querySelector(".editButton");
@@ -164,13 +165,13 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
-function rankings() {
-  let rankDropdown = document.querySelector(".rank");
+// function rankings() {
+//   let rankDropdown = document.querySelector(".rank");
 
-  let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
+//   let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
 
-  console.log(rank);
-}
+//   console.log(rank);
+// }
 
 //add workout
 function displayWorkouts() {
@@ -247,7 +248,7 @@ function createWorkoutContent(workout) {
 
   save.addEventListener("click", () => {
     saveWorkout(workoutItem, workout._id);
-    rankings();
+    // rankings();
   });
 
   workoutItem.innerHTML = `
