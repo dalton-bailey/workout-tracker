@@ -6,9 +6,6 @@ let goals = [];
 async function fetchGoals() {
   let response = await fetch(goalsApi);
   let fetchedGoals = await response.json();
-
-  // console.log("goals",fetchedGoals);
-
   return fetchedGoals;
 }
 
@@ -58,7 +55,6 @@ function addWorkoutToArray(t, d, s) {
   workouts.push(workoutData);
   displayWorkouts();
 
-  // console.log("all workouts", workouts);
 }
 
 //push new goal to goals array
@@ -287,17 +283,13 @@ async function main() {
   //event listener to get new goal data
   newGoalForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    let goalSport =
-      goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
+    let goalSport = goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
 
     let goalDistance = Number(document.getElementById("gotalDistance").value);
 
-    console.log(goalSport, goalDistance);
-
-    if (goalDistance === "") {
+    if (goalDistance === " ") {
       alert("please input a goal distance");
     } else {
-      // addGoals(goalSport, goalDistance);
       addGoalToArray(goalSport, goalDistance);
     }
   });
