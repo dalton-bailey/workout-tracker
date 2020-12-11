@@ -102,11 +102,7 @@ function saveWorkout(elem, id) {
   let updateT = elem.querySelector(".time").value;
 
   let updateD = Number(elem.querySelector(".distance").value);
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 46fd81e5f1d42c9dfedd3cda6fc169e25821e938
   let rankDropdown = elem.querySelector(".rank");
 
   let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
@@ -161,7 +157,6 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
-<<<<<<< HEAD
 function rankings() {
   const easyBtn = document.querySelector("#easyBtn");
   const mediumBtn = document.querySelector("#mediumBtn");
@@ -183,8 +178,6 @@ function rankings() {
     console.log(hardList);
   });
 }
-=======
->>>>>>> 46fd81e5f1d42c9dfedd3cda6fc169e25821e938
 
 //add workout
 function displayWorkouts() {
