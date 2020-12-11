@@ -108,17 +108,17 @@ function saveWorkout(elem, id) {
   let updateT = elem.querySelector(".time").value;
 
   let updateD = Number(elem.querySelector(".distance").value);
-  
-  let rankDropdown = document.querySelector(".rank");
+
+  let rankDropdown = elem.querySelector(".rank");
 
   let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
-  console.log(updateR)
+  console.log(updateR);
 
   const data = {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
-    ranking: updateR
+    ranking: updateR,
   };
 
   const editButton = elem.querySelector(".editButton");
@@ -127,8 +127,8 @@ function saveWorkout(elem, id) {
   const saveButton = elem.querySelector(".saveButton");
   saveButton.style.display = "none";
 
-  const rank = elem.querySelector(".rank");
-  rank.style.display = "none";
+  // const rank = elem.querySelector(".rank");
+  // rank.style.display = "none";
 
   console.log(updateT, updateD);
   updateWorkout(id, data);
@@ -165,13 +165,27 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
-// function rankings() {
-//   let rankDropdown = document.querySelector(".rank");
+function rankings() {
+  const easyBtn = document.querySelector("#easyBtn");
+  const mediumBtn = document.querySelector("#mediumBtn");
+  const hardBtn = document.querySelector("#hardBtn");
 
-//   let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
+  let easyList = workouts.filter((workout) => workout.ranking === "easy");
+  let mediumList = workouts.filter((workout) => workout.ranking === "medium");
+  let hardList = workouts.filter((workout) => workout.ranking === "hard");
 
-//   console.log(rank);
-// }
+  easyBtn.addEventListener("click", () => {
+    console.log(easyList);
+  });
+
+  mediumBtn.addEventListener("click", () => {
+    console.log(mediumList);
+  });
+
+  hardBtn.addEventListener("click", () => {
+    console.log(hardList);
+  });
+}
 
 //add workout
 function displayWorkouts() {
@@ -187,6 +201,16 @@ function displayWorkouts() {
   workouts.forEach((workout) => createWorkoutContent(workout));
 
   distances();
+  rankings();
+}
+
+//rankings content 
+function createRankingsContent(workout) {
+  const easyList = document.querySelector("#easyWorkouts")
+  const mediumList = document.querySelector("#mediumWorkouts")
+  const hardList = document.querySelector("hardWorkouts")
+
+
 }
 
 //workouts content
@@ -233,7 +257,7 @@ function createWorkoutContent(workout) {
   const rankDropdown = document.createElement("select");
   rankDropdown.name = "ranks";
   rankDropdown.className = "rank";
-  rankDropdown.style.display = "none";
+  // rankDropdown.style.display = "none";
   rankDropdown.disabled = "true";
 
   values.forEach((rank) => {
@@ -248,7 +272,6 @@ function createWorkoutContent(workout) {
 
   save.addEventListener("click", () => {
     saveWorkout(workoutItem, workout._id);
-    // rankings();
   });
 
   workoutItem.innerHTML = `
@@ -304,14 +327,14 @@ async function main() {
 
 main();
 
-//   window.addEventListener("load", (event) => {
-//       userName()
-//   });
+// window.addEventListener("load", () => {
+//     userName()
+// });
 
-//   const userName = () => {
-//   var person = prompt("Please enter your name");
-//   if (person != null) {
-//     document.getElementById("user-name").innerHTML =
-//       "Hello " + person ;
-//   }
-//   }
+// const userName = () => {
+// let person = prompt("Please enter your name");
+// if (person != null) {
+//   document.querySelector(".userName").innerHTML =
+//     "Hello " + person ;
+// }
+// }

@@ -17,7 +17,7 @@
   <body>
     <div id="loader" class="center"></div> 
     <div style="width: 100%; display: flex; justify-content: flex-end">
-      <p id="user-name uppercase">Bailey</p>
+      <p class="userName uppercase"></p>
     </div>
     <div class="content">
       <div class="sectionOne">
@@ -114,25 +114,18 @@
         </div>
         <div class="box four">
           <h1 class="header uppercase text-center">Rankings</h1>
+          <div>
+            <button type="" id="easyBtn" class="rankingBtn">Easy</button>
+            <button type="" id="mediumBtn" class="rankingBtn">Medium</button>
+            <button type="" id="hardBtn" class="rankingBtn">Hard</button>
+          </div>
+          <div id="easyWorkouts"></div>
+          <div id="mediumWorkouts"></div>
+          <div id="hardWorkouts"></div>
         </div>
       </div>
     </div>
     <script src="workouts.js"></script>
     <script src="goals.js"></script>
-    <script> 
-      document.onreadystatechange = function() { 
-          if (document.readyState !== "complete") { 
-              document.querySelector( 
-                "body").style.visibility = "hidden"; 
-              document.querySelector( 
-                "#loader").style.visibility = "visible"; 
-          } else { 
-              document.querySelector( 
-                "#loader").style.display = "none"; 
-              document.querySelector( 
-                "body").style.visibility = "visible"; 
-          } 
-      }; 
-  </script>
   </body>
 </html>
