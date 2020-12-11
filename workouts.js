@@ -7,8 +7,6 @@ async function fetchWorkouts() {
   let response = await fetch(api);
   let fetchedWorkouts = await response.json();
 
-  // console.log(fetchedWorkouts);
-
   return fetchedWorkouts;
 }
 
@@ -59,14 +57,11 @@ function addWorkoutToArray(t, d, s) {
   workouts.push(workoutData);
   displayWorkouts();
 
-  // console.log("all workouts", workouts);
 }
 
 //splice workout for user interface
 function spliceWorkout(id) {
-  // console.log(workouts, id);
   const index = workouts.findIndex((workout) => workout._id == id);
-  // deleteWorkout(id);
   workouts.splice(index, 1);
   displayWorkouts();
   deleteWorkout(id);
@@ -77,7 +72,6 @@ function spliceWorkout(id) {
 function completeWorkout(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
   complete = workouts[index]["complete"] = !workouts[index]["complete"];
-  // console.log(workouts, index, complete);
   updateWorkout(id, workouts[index]);
 }
 
@@ -108,7 +102,11 @@ function saveWorkout(elem, id) {
   let updateT = elem.querySelector(".time").value;
 
   let updateD = Number(elem.querySelector(".distance").value);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 46fd81e5f1d42c9dfedd3cda6fc169e25821e938
   let rankDropdown = elem.querySelector(".rank");
 
   let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
@@ -158,13 +156,12 @@ function distances() {
     .reduce((acc, curr) => acc + curr.distance, 0)
     .toFixed(2);
 
-  // console.log(runTotal, swimTotal, bikeTotal);
-
   runDistance.innerHTML = runTotal + " total miles";
   swimDistance.innerHTML = swimTotal + " total miles";
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
+<<<<<<< HEAD
 function rankings() {
   const easyBtn = document.querySelector("#easyBtn");
   const mediumBtn = document.querySelector("#mediumBtn");
@@ -186,6 +183,8 @@ function rankings() {
     console.log(hardList);
   });
 }
+=======
+>>>>>>> 46fd81e5f1d42c9dfedd3cda6fc169e25821e938
 
 //add workout
 function displayWorkouts() {
