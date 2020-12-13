@@ -23,15 +23,30 @@
       <div class="sectionOne">
         <div class="one">
           <h1 class="header uppercase">Workouts</h1>
-          <div class="sport">
+          <div id="filterDiv">
+          <form id="filter">
+                <select id="filterDropdown">
+                  <option value="1">Easy</option>
+                  <option value="2">Medium</option>
+                  <option value="3">Hard</option>
+                  <option value="4">Runs</option>
+                  <option value="5">Swims</option>
+                  <option value="6">Bikes</option>
+                </select>
+          </form>
+          <form>
+            <button type="submit" id="filterBy" class="filterBtn">Filter</button>
+          </form>
+        </div>
+          <div class="sport runs">
             <h2><i class="fas fa-running"></i></h2>
             <div class="run"></div>
           </div>
-          <div class="sport">
+          <div class="sport swims">
             <h2><i class="fas fa-swimmer"></i></h2>
             <div class="swim"></div>
           </div>
-          <div class="sport">
+          <div class="sport bikes">
             <h2><i class="fas fa-biking"></i></h2>
             <div class="bike"></div>
           </div>

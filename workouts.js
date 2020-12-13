@@ -56,7 +56,6 @@ function addWorkoutToArray(t, d, s, r) {
   postWorkout(workoutData);
   workouts.push(workoutData);
   displayWorkouts();
-
 }
 
 //splice workout for user interface
@@ -90,6 +89,8 @@ function editWorkout(elem, id) {
   const saveButton = elem.querySelector(".saveButton");
   saveButton.style.display = "block";
 
+  const currentRank = elem.querySelector(".currentRank");
+  currentRank.style.display = "none";
 }
 
 //save workout
@@ -119,8 +120,12 @@ function saveWorkout(elem, id) {
   const saveButton = elem.querySelector(".saveButton");
   saveButton.style.display = "none";
 
-  // const rank = elem.querySelector(".rank");
-  // rank.style.display = "none";
+  const rank = elem.querySelector(".rank");
+  rank.style.display = "none";
+
+  const currentRank = elem.querySelector(".currentRank");
+  currentRank.style.display = "block";
+  currentRank.innerHTML = updateR;
 
   console.log(updateT, updateD, updateR);
   updateWorkout(id, data);
@@ -155,6 +160,41 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
+function filter(filterValue) {
+  let easyWorkouts = workouts.filter((workout) => workout.rank === "Easy")
+  let medWorkouts = workouts.filter((workout) => workout.rank === "Medium")
+  let hardWorkouts = workouts.filter((workout) => workout.rank === "Hard")
+
+  let runs = document.querySelector(".runs")
+  let swims = document.querySelector(".swims")
+  let bikes = document.querySelector(".bikes")
+
+
+  if (filterValue === "Easy") {
+    console.log(easyWorkouts)
+  }
+  else if (filterValue === "Medium") {
+    console.log(medWorkouts)
+  }
+  else if (filterValue === "Hard") {
+    console.log(hardWorkouts)
+  }
+  else if (filterValue === "Runs") {
+    swims.style.display = "none"
+    bikes.style.display = "none"
+    runs.style.display = "block"
+  }
+  else if (filterValue === "Swims") {
+    runs.style.display = "none"
+    bikes.style.display = "none"
+    swims.style.display = "block"
+  }
+  else if (filterValue === "Bikes") {
+    runs.style.display = "none"
+    swims.style.display = "none"
+    bikes.style.display = "block"
+  }
+}
 
 //add workout
 function displayWorkouts() {
@@ -171,7 +211,6 @@ function displayWorkouts() {
 
   distances();
 }
-
 
 //workouts content
 function createWorkoutContent(workout) {
@@ -212,20 +251,6 @@ function createWorkoutContent(workout) {
   save.innerHTML = `<i class="far fa-save"></i>`;
   save.style.display = "none";
 
-  // const values = ["", "easy", "medium", "hard"];
-
-  // const rankDropdown = document.createElement("select");
-  // rankDropdown.name = "ranks";
-  // rankDropdown.className = "rank";
-  // rankDropdown.style.display = "none";
-  // rankDropdown.disabled = "true";
-
-  // values.forEach((rank) => {
-  //   let option = document.createElement("option");
-  //   option.text = rank;
-  //   rankDropdown.appendChild(option);
-  // });
-
   edit.addEventListener("click", () => {
     editWorkout(workoutItem, workout._id);
   });
@@ -238,11 +263,10 @@ function createWorkoutContent(workout) {
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
   <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
-  <div> <label for="rank">Rank</label> <select id="rank" class="rank" disabled> <option value="1">Easy</option> <option value="2">Medium</option> <option value="3">Hard</option> </select> </div>
+  <div class="rankDiv"> <label for="rank">Rank</label> <p class="currentRank"> ${workout.rank} </p> <select id="rank" class="rank" disabled style="display:none"> <option value="1">Easy</option> <option value="2">Medium</option> <option value="3">Hard</option> </select> </div>
   `;
 
   workoutItem.prepend(check);
-  // workoutItem.appendChild(rankDropdown);
   workoutItem.appendChild(close);
   workoutItem.appendChild(edit);
   workoutItem.appendChild(save);
@@ -265,19 +289,21 @@ async function main() {
 
   let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  let rankDropdown = document.querySelector("#rank")
+  let rankDropdown = document.querySelector("#rank");
+  
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
     event.preventDefault();
+
     let time = document.getElementById("workoutTime").value;
 
     let distance = Number(document.getElementById("workoutDistance").value);
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
 
-    let rank = rankDropdown.options[rankDropdown.selectedIndex].text
-    
+    let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
+
     if (time === "") {
       alert("Please input a time");
     } else if (distance === "") {
@@ -287,6 +313,17 @@ async function main() {
       updateWorkout(time, distance, sport, rank);
     }
   });
+
+  let filterSubmit = document.querySelector("#filterDiv")
+  let filterDropdown = document.querySelector("#filterDropdown")
+
+  filterSubmit.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let filterValue = filterDropdown.options[filterDropdown.selectedIndex].text
+
+    filter(filterValue);
+  })
 }
 
 main();
