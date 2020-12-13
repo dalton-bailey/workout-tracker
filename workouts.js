@@ -43,14 +43,14 @@ async function updateWorkout(id, workout) {
 }
 
 //push new workout to workouts array
-function addWorkoutToArray(t, d, s, r) {
+function addWorkoutToArray(t, d, s) {
   const workoutData = {
     complete: false,
     sport: s,
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
-    rank: "",
+    rank: " ",
   };
 
   postWorkout(workoutData);
@@ -289,7 +289,6 @@ async function main() {
 
   let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  // let rankDropdown = document.querySelector("#rank");
   
 
   //event listener to get new workout data
@@ -302,15 +301,14 @@ async function main() {
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
 
-    // let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
 
     if (time === "") {
       alert("Please input a time");
     } else if (distance === "") {
       alert("Please input a distance");
     } else {
-      addWorkoutToArray(time, distance, sport, rank);
-      updateWorkout(time, distance, sport, rank);
+      addWorkoutToArray(time, distance, sport);
+      updateWorkout(time, distance, sport);
     }
   });
 
