@@ -23,7 +23,7 @@ const WorkoutsSchema = new Schema({
     required: true,
   },
   ranking: {
-    type: String
+    type: String,
   }
 });
 
