@@ -192,7 +192,7 @@ function filter(filterValue) {
   else if (filterValue === "Bikes") {
     runs.style.display = "none"
     swims.style.display = "none"
-    bikes.style.display = "block"
+    runs.style.display = "block"
   }
 }
 
@@ -289,8 +289,9 @@ async function main() {
 
   let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  let rankDropdown = document.querySelector("#rank");
+  // let rankDropdown = document.querySelector("#rank");
   
+
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -301,7 +302,7 @@ async function main() {
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
 
-    let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
+    // let rank = rankDropdown.options[rankDropdown.selectedIndex].text;
 
     if (time === "") {
       alert("Please input a time");
