@@ -291,7 +291,6 @@ async function main() {
   let sportDropdown = document.getElementById("sports");
   let rankDropdown = document.querySelector("#rank");
   
-
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
     event.preventDefault();
