@@ -22,10 +22,6 @@ const WorkoutsSchema = new Schema({
     type: Number,
     required: true,
   },
-  ranking: {
-    type: String,
-    required: true,
-  }
 });
 
 const Workouts = mongoose.model('Workouts', WorkoutsSchema);

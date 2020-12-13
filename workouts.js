@@ -43,14 +43,13 @@ async function updateWorkout(id, workout) {
 }
 
 //push new workout to workouts array
-function addWorkoutToArray(t, d, s, r) {
+function addWorkoutToArray(t, d, s) {
   const workoutData = {
     complete: false,
     sport: s,
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
-    ranking: r,
   };
 
   postWorkout(workoutData);
@@ -90,7 +89,6 @@ function editWorkout(elem, id) {
   const saveButton = elem.querySelector(".saveButton");
   saveButton.style.display = "block";
 
-  console.log(id);
 }
 
 //save workout
@@ -107,7 +105,7 @@ function saveWorkout(elem, id) {
 
   let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
 
-  const data = {
+  let data = {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
@@ -156,27 +154,6 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
-function rankings() {
-  const easyBtn = document.querySelector("#easyBtn");
-  const mediumBtn = document.querySelector("#mediumBtn");
-  const hardBtn = document.querySelector("#hardBtn");
-
-  let easyList = workouts.filter((workout) => workout.ranking === "easy");
-  let mediumList = workouts.filter((workout) => workout.ranking === "medium");
-  let hardList = workouts.filter((workout) => workout.ranking === "hard");
-
-  // easyBtn.addEventListener("click", () => {
-  //   console.log(easyList);
-  // });
-
-  // mediumBtn.addEventListener("click", () => {
-  //   console.log(mediumList);
-  // });
-
-  // hardBtn.addEventListener("click", () => {
-  //   console.log(hardList);
-  // });
-}
 
 //add workout
 function displayWorkouts() {
@@ -192,16 +169,8 @@ function displayWorkouts() {
   workouts.forEach((workout) => createWorkoutContent(workout));
 
   distances();
-  rankings();
 }
 
-//rankings content 
-function createRankingsContent(workout) {
-  const easyList = document.querySelector("#easyWorkouts")
-  const mediumList = document.querySelector("#mediumWorkouts")
-  const hardList = document.querySelector("hardWorkouts")
-
-}
 
 //workouts content
 function createWorkoutContent(workout) {
@@ -294,7 +263,6 @@ async function main() {
 
   let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  let rankDropdown = document.querySelector("#ranking")
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -304,17 +272,14 @@ async function main() {
     let distance = Number(document.getElementById("workoutDistance").value);
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
-
-    let ranking = rankDropdown.options[rankDropdown.selectedIndex].text
-
     
     if (time === "") {
       alert("Please input a time");
     } else if (distance === "") {
       alert("Please input a distance");
     } else {
-      addWorkoutToArray(time, distance, sport, ranking);
-      updateWorkout(time, distance, sport, ranking);
+      addWorkoutToArray(time, distance, sport);
+      updateWorkout(time, distance, sport);
     }
   });
 }
