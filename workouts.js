@@ -50,7 +50,7 @@ function addWorkoutToArray(t, d, s, r) {
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
-    rank: r,
+    rank: "",
   };
 
   postWorkout(workoutData);
@@ -192,7 +192,7 @@ function filter(filterValue) {
   else if (filterValue === "Bikes") {
     runs.style.display = "none"
     swims.style.display = "none"
-    runs.style.display = "block"
+    bikes.style.display = "block"
   }
 }
 
