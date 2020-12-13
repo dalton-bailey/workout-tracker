@@ -43,13 +43,14 @@ async function updateWorkout(id, workout) {
 }
 
 //push new workout to workouts array
-function addWorkoutToArray(t, d, s) {
+function addWorkoutToArray(t, d, s, r) {
   const workoutData = {
     complete: false,
     sport: s,
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
+    rank: r,
   };
 
   postWorkout(workoutData);
@@ -109,7 +110,7 @@ function saveWorkout(elem, id) {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
-    ranking: updateR,
+    rank: updateR,
   };
 
   const editButton = elem.querySelector(".editButton");
@@ -118,8 +119,8 @@ function saveWorkout(elem, id) {
   const saveButton = elem.querySelector(".saveButton");
   saveButton.style.display = "none";
 
-  const rank = elem.querySelector(".rank");
-  rank.style.display = "none";
+  // const rank = elem.querySelector(".rank");
+  // rank.style.display = "none";
 
   console.log(updateT, updateD, updateR);
   updateWorkout(id, data);
@@ -211,19 +212,19 @@ function createWorkoutContent(workout) {
   save.innerHTML = `<i class="far fa-save"></i>`;
   save.style.display = "none";
 
-  const values = ["", "easy", "medium", "hard"];
+  // const values = ["", "easy", "medium", "hard"];
 
-  const rankDropdown = document.createElement("select");
-  rankDropdown.name = "ranks";
-  rankDropdown.className = "rank";
-  rankDropdown.style.display = "none";
-  rankDropdown.disabled = "true";
+  // const rankDropdown = document.createElement("select");
+  // rankDropdown.name = "ranks";
+  // rankDropdown.className = "rank";
+  // rankDropdown.style.display = "none";
+  // rankDropdown.disabled = "true";
 
-  values.forEach((rank) => {
-    let option = document.createElement("option");
-    option.text = rank;
-    rankDropdown.appendChild(option);
-  });
+  // values.forEach((rank) => {
+  //   let option = document.createElement("option");
+  //   option.text = rank;
+  //   rankDropdown.appendChild(option);
+  // });
 
   edit.addEventListener("click", () => {
     editWorkout(workoutItem, workout._id);
@@ -237,10 +238,11 @@ function createWorkoutContent(workout) {
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
   <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
+  <div> <label for="rank">Rank</label> <select id="rank" class="rank" disabled> <option value="1">Easy</option> <option value="2">Medium</option> <option value="3">Hard</option> </select> </div>
   `;
 
   workoutItem.prepend(check);
-  workoutItem.appendChild(rankDropdown);
+  // workoutItem.appendChild(rankDropdown);
   workoutItem.appendChild(close);
   workoutItem.appendChild(edit);
   workoutItem.appendChild(save);
@@ -263,6 +265,7 @@ async function main() {
 
   let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
+  let rankDropdown = document.querySelector("#rank")
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -272,14 +275,16 @@ async function main() {
     let distance = Number(document.getElementById("workoutDistance").value);
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
+
+    let rank = rankDropdown.options[rankDropdown.selectedIndex].text
     
     if (time === "") {
       alert("Please input a time");
     } else if (distance === "") {
       alert("Please input a distance");
     } else {
-      addWorkoutToArray(time, distance, sport);
-      updateWorkout(time, distance, sport);
+      addWorkoutToArray(time, distance, sport, rank);
+      updateWorkout(time, distance, sport, rank);
     }
   });
 }

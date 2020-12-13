@@ -23,6 +23,7 @@ router.post("/", (req, res) => {
     time: req.body.time,
     distance: req.body.distance,
     pace: req.body.pace,
+    rank: req.body.rank,
   })
     .then((workouts) => {
       res.json(workouts);
