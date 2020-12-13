@@ -43,14 +43,14 @@ async function updateWorkout(id, workout) {
 }
 
 //push new workout to workouts array
-function addWorkoutToArray(t, d, s) {
+function addWorkoutToArray(t, d, s, r) {
   const workoutData = {
     complete: false,
     sport: s,
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
-    rank: " ",
+    rank: r,
   };
 
   postWorkout(workoutData);
@@ -161,38 +161,103 @@ function distances() {
 }
 
 function filter(filterValue) {
-  let easyWorkouts = workouts.filter((workout) => workout.rank === "Easy")
-  let medWorkouts = workouts.filter((workout) => workout.rank === "Medium")
-  let hardWorkouts = workouts.filter((workout) => workout.rank === "Hard")
-
   let runs = document.querySelector(".runs")
   let swims = document.querySelector(".swims")
   let bikes = document.querySelector(".bikes")
 
+  let easy = document.getElementsByClassName("easy")
+  let med = document.getElementsByClassName("medium")
+  let hard = document.getElementsByClassName("hard")
 
-  if (filterValue === "Easy") {
-    console.log(easyWorkouts)
+  if (filterValue === "Easy") {    
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "flex"
+    }
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "none"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "none"
+    }
+
+    swims.style.display = "block"
+    bikes.style.display = "block"
+    runs.style.display = "block"
   }
   else if (filterValue === "Medium") {
-    console.log(medWorkouts)
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "flex"
+    }
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "none"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "none"
+    }  
+
+    swims.style.display = "block"
+    bikes.style.display = "block"
+    runs.style.display = "block"
   }
   else if (filterValue === "Hard") {
-    console.log(hardWorkouts)
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "none"
+    }
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "none"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "flex"
+    }  
+
+    swims.style.display = "block"
+    bikes.style.display = "block"
+    runs.style.display = "block"
   }
   else if (filterValue === "Runs") {
     swims.style.display = "none"
     bikes.style.display = "none"
     runs.style.display = "block"
+
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "flex"
+    }
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "flex"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "flex"
+    } 
   }
   else if (filterValue === "Swims") {
     runs.style.display = "none"
     bikes.style.display = "none"
     swims.style.display = "block"
+
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "flex"
+    }
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "flex"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "flex"
+    } 
   }
   else if (filterValue === "Bikes") {
     runs.style.display = "none"
     swims.style.display = "none"
     bikes.style.display = "block"
+
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "flex"
+    }
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "flex"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "flex"
+    } 
   }
 }
 
@@ -263,13 +328,24 @@ function createWorkoutContent(workout) {
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
   <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </div> 
   <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
-  <div class="rankDiv"> <label for="rank">Rank</label> <p class="currentRank"> ${workout.rank} </p> <select id="rank" class="rank" disabled style="display:none"> <option value="1">Easy</option> <option value="2">Medium</option> <option value="3">Hard</option> </select> </div>
+  <div class="rankDiv"> <label for="rank">Rank</label> <p class="currentRank"> ${workout.rank} </p> <select id="rank" class="rank" disabled style="display:none"> <option value="1"> </option> <option value="2">Easy</option> <option value="3">Medium</option> <option value="4">Hard</option> </select> </div>
   `;
 
   workoutItem.prepend(check);
   workoutItem.appendChild(close);
   workoutItem.appendChild(edit);
   workoutItem.appendChild(save);
+
+
+  if (workout.rank === "Easy") {
+    workoutItem.classList.add("easy", "listItem")
+  }
+  else if (workout.rank === "Medium") {
+    workoutItem.classList.add("medium", "listItem")
+  }
+  else if (workout.rank === "Hard") {
+    workoutItem.classList.add("hard", "listItem")
+  }
 
   if (workout.sport === "Run") {
     runList.appendChild(workoutItem);
@@ -301,13 +377,15 @@ async function main() {
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
 
+    let rank = " "
+
 
     if (time === "") {
       alert("Please input a time");
     } else if (distance === "") {
       alert("Please input a distance");
     } else {
-      addWorkoutToArray(time, distance, sport);
+      addWorkoutToArray(time, distance, sport, rank);
       updateWorkout(time, distance, sport);
     }
   });
