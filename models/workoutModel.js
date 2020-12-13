@@ -24,6 +24,7 @@ const WorkoutsSchema = new Schema({
   },
   ranking: {
     type: String,
+    required: true,
   }
 });
 
