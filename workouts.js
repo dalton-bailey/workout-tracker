@@ -107,7 +107,7 @@ function saveWorkout(elem, id) {
 
   let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
 
-  const data = {
+  let data = {
     distance: updateD,
     time: updateT,
     pace: (updateT / updateD).toFixed(2),
@@ -156,27 +156,27 @@ function distances() {
   bikeDistance.innerHTML = bikeTotal + " total miles";
 }
 
-function rankings() {
-  const easyBtn = document.querySelector("#easyBtn");
-  const mediumBtn = document.querySelector("#mediumBtn");
-  const hardBtn = document.querySelector("#hardBtn");
+// function rankings() {
+//   const easyBtn = document.querySelector("#easyBtn");
+//   const mediumBtn = document.querySelector("#mediumBtn");
+//   const hardBtn = document.querySelector("#hardBtn");
 
-  let easyList = workouts.filter((workout) => workout.ranking === "easy");
-  let mediumList = workouts.filter((workout) => workout.ranking === "medium");
-  let hardList = workouts.filter((workout) => workout.ranking === "hard");
+//   let easyList = workouts.filter((workout) => workout.ranking === "easy");
+//   let mediumList = workouts.filter((workout) => workout.ranking === "medium");
+//   let hardList = workouts.filter((workout) => workout.ranking === "hard");
 
-  // easyBtn.addEventListener("click", () => {
-  //   console.log(easyList);
-  // });
+//   // easyBtn.addEventListener("click", () => {
+//   //   console.log(easyList);
+//   // });
 
-  // mediumBtn.addEventListener("click", () => {
-  //   console.log(mediumList);
-  // });
+//   // mediumBtn.addEventListener("click", () => {
+//   //   console.log(mediumList);
+//   // });
 
-  // hardBtn.addEventListener("click", () => {
-  //   console.log(hardList);
-  // });
-}
+//   // hardBtn.addEventListener("click", () => {
+//   //   console.log(hardList);
+//   // });
+// }
 
 //add workout
 function displayWorkouts() {
@@ -192,16 +192,16 @@ function displayWorkouts() {
   workouts.forEach((workout) => createWorkoutContent(workout));
 
   distances();
-  rankings();
+  // rankings();
 }
 
-//rankings content 
-function createRankingsContent(workout) {
-  const easyList = document.querySelector("#easyWorkouts")
-  const mediumList = document.querySelector("#mediumWorkouts")
-  const hardList = document.querySelector("hardWorkouts")
+// //rankings content 
+// function createRankingsContent(workout) {
+//   const easyList = document.querySelector("#easyWorkouts")
+//   const mediumList = document.querySelector("#mediumWorkouts")
+//   const hardList = document.querySelector("hardWorkouts")
 
-}
+// }
 
 //workouts content
 function createWorkoutContent(workout) {
