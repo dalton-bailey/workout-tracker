@@ -106,7 +106,6 @@ function saveWorkout(elem, id) {
   let rankDropdown = elem.querySelector(".rank");
 
   let updateR = rankDropdown.options[rankDropdown.selectedIndex].text;
-  console.log(updateR);
 
   const data = {
     distance: updateD,
@@ -121,10 +120,10 @@ function saveWorkout(elem, id) {
   const saveButton = elem.querySelector(".saveButton");
   saveButton.style.display = "none";
 
-  // const rank = elem.querySelector(".rank");
-  // rank.style.display = "none";
+  const rank = elem.querySelector(".rank");
+  rank.style.display = "none";
 
-  console.log(updateT, updateD);
+  console.log(updateT, updateD, updateR);
   updateWorkout(id, data);
 }
 
@@ -166,17 +165,17 @@ function rankings() {
   let mediumList = workouts.filter((workout) => workout.ranking === "medium");
   let hardList = workouts.filter((workout) => workout.ranking === "hard");
 
-  easyBtn.addEventListener("click", () => {
-    console.log(easyList);
-  });
+  // easyBtn.addEventListener("click", () => {
+  //   console.log(easyList);
+  // });
 
-  mediumBtn.addEventListener("click", () => {
-    console.log(mediumList);
-  });
+  // mediumBtn.addEventListener("click", () => {
+  //   console.log(mediumList);
+  // });
 
-  hardBtn.addEventListener("click", () => {
-    console.log(hardList);
-  });
+  // hardBtn.addEventListener("click", () => {
+  //   console.log(hardList);
+  // });
 }
 
 //add workout
@@ -201,7 +200,6 @@ function createRankingsContent(workout) {
   const easyList = document.querySelector("#easyWorkouts")
   const mediumList = document.querySelector("#mediumWorkouts")
   const hardList = document.querySelector("hardWorkouts")
-
 
 }
 
@@ -249,7 +247,7 @@ function createWorkoutContent(workout) {
   const rankDropdown = document.createElement("select");
   rankDropdown.name = "ranks";
   rankDropdown.className = "rank";
-  // rankDropdown.style.display = "none";
+  rankDropdown.style.display = "none";
   rankDropdown.disabled = "true";
 
   values.forEach((rank) => {
@@ -288,15 +286,15 @@ function createWorkoutContent(workout) {
 }
 
 async function main() {
-  const fetchedWorkouts = await fetchWorkouts();
+  let fetchedWorkouts = await fetchWorkouts();
   workouts = fetchedWorkouts;
   displayWorkouts();
 
   console.log(workouts);
 
-  const newWorkoutForm = document.querySelector("#newWorkoutForm");
+  let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  let rankingDropdown = document.getElementById("ranking");
+  let rankDropdown = document.querySelector(".rank")
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -307,7 +305,8 @@ async function main() {
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
 
-    let ranking = rankingDropdown.options[rankingDropdown.selectedIndex].text
+    let ranking = rankDropdown.options[rankDropdown.selectedIndex].text
+
 
     if (time === "") {
       alert("Please input a time");
@@ -315,7 +314,7 @@ async function main() {
       alert("Please input a distance");
     } else {
       addWorkoutToArray(time, distance, sport, ranking);
-      updateWorkout(time, distance, sport);
+      updateWorkout(time, distance, sport, ranking);
     }
   });
 }
