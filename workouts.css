@@ -15,8 +15,8 @@ body {
 }
 .box {
   width: 50%;
-  border: 2px solid grey;
-  border-radius: 25px;
+  /* border: 2px solid grey;
+  border-radius: 25px; */
   margin: 20px;
 }
 .one {
@@ -32,7 +32,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%
+  width: 100%;
 }
 .header {
   letter-spacing: 1px;
@@ -70,7 +70,8 @@ body {
   border: none;
   border-radius: 0px 5px 5px 0px;
 }
-#filterDropdown:hover, .filterBtn:hover {
+#filterDropdown:hover,
+.filterBtn:hover {
   cursor: pointer;
 }
 .listItem {
@@ -83,6 +84,15 @@ body {
   align-items: center;
   box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
 }
+.check {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
 .listItem div {
   display: flex;
   flex-direction: column;
@@ -114,37 +124,49 @@ body {
   color: black;
   border-radius: 5px;
   text-align: center;
+  margin-left: 5px;
 }
-.editButton:hover {
+.saveButton {
+  padding: 7px 9px 7px 10px;
+  font-size: 16px;
+  border: none;
+  border: 2px solid black;
+  background-color: transparent;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.editButton:hover,
+.saveButton:hover {
   cursor: pointer;
   background: black;
   color: white;
 }
+
 .sectionTwo {
   display: flex;
 }
-.distances div, .goals div{
+.distances div,
+.goals div {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
-.check {
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-  height: 25px;
-  width: 25px;
-  background-color: #eee;}
 
-  .listItem input:checked {
-    background-color: red;
-  }
+.goal, .totalDistance {
+  box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
 
-  input:disabled {
-    background-color: transparent;
-    border: none;
-    color: black;
+.goal .fas, .totalDistance .fas {
+  font-size: 24px;
+}
 
-  }
-
-
+input:disabled {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 16px;
+}

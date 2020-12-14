@@ -68,10 +68,18 @@ function spliceWorkout(id) {
 }
 
 //complete workout
-function completeWorkout(id) {
+function completeWorkout(id, workout) {
   const index = workouts.findIndex((workout) => workout._id == id);
   complete = workouts[index]["complete"] = !workouts[index]["complete"];
   updateWorkout(id, workouts[index]);
+
+  const completedWorkouts = workouts.filter((workout) => workout.complete === true)
+
+  console.log(completedWorkouts)
+
+  if (workout.complete === true) {
+
+  }
 }
 
 //edit workout

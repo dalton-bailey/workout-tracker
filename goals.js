@@ -173,7 +173,7 @@ function createRunGoalContent(goal) {
     saveGoal(runGoal, goal._id);
   });
 
-  runGoal.innerHTML = `<div><p> ${runTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
+  runGoal.innerHTML = `<div> <p> ${runTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled> </div>`;
 
   runGoal.appendChild(close);
   runGoal.appendChild(edit);
@@ -218,7 +218,7 @@ function createSwimGoalContent(goal) {
     saveGoal(swimGoal, goal._id);
   });
 
-  swimGoal.innerHTML = `<div><p> ${swimTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
+  swimGoal.innerHTML = `<div><p> ${swimTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled></div>`;
 
   swimGoal.appendChild(close);
   swimGoal.appendChild(edit);
@@ -263,7 +263,7 @@ function createBikeGoalContent(goal) {
     saveGoal(bikeGoal, goal._id);
   });
 
-  bikeGoal.innerHTML = `<div><p> ${bikeTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled><p>`;
+  bikeGoal.innerHTML = `<div><p> ${bikeTotal} / </p> <input class="goalDistance" type="text" value="${goal.distance}" disabled></div>`;
 
   bikeGoal.appendChild(close);
   bikeGoal.appendChild(edit);
