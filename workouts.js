@@ -68,18 +68,14 @@ function spliceWorkout(id) {
 }
 
 //complete workout
-function completeWorkout(id, workout) {
+function completeWorkout(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
   complete = workouts[index]["complete"] = !workouts[index]["complete"];
   updateWorkout(id, workouts[index]);
 
-  const completedWorkouts = workouts.filter((workout) => workout.complete === true)
+  let complete = document.getElementsByClassName("complete");
 
-  console.log(completedWorkouts)
-
-  if (workout.complete === true) {
-
-  }
+  
 }
 
 //edit workout
@@ -169,106 +165,110 @@ function distances() {
 }
 
 function filter(filterValue) {
-  let runs = document.getElementsByClassName("run")
-  let swims = document.getElementsByClassName("swim")
-  let bikes = document.getElementsByClassName("bike")
+  let runs = document.getElementsByClassName("run");
+  let swims = document.getElementsByClassName("swim");
+  let bikes = document.getElementsByClassName("bike");
 
-  let easy = document.getElementsByClassName("easy")
-  let med = document.getElementsByClassName("medium")
-  let hard = document.getElementsByClassName("hard")
+  let easy = document.getElementsByClassName("easy");
+  let med = document.getElementsByClassName("medium");
+  let hard = document.getElementsByClassName("hard");
+
+  let complete = document.getElementsByClassName("complete");
+  let notComplete = document.getElementsByClassName("notComplete")
 
   if (filterValue === "All") {
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "flex"
+    for (var i = 0; i < easy.length; i++) {
+      easy[i].style.display = "flex";
     }
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "flex"
+    for (var i = 0; i < med.length; i++) {
+      med[i].style.display = "flex";
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "flex"
+    for (var i = 0; i < hard.length; i++) {
+      hard[i].style.display = "flex";
     }
-    for (var i=0; i < runs.length; i++) {
-      runs[i].style.display = "flex"
+    for (var i = 0; i < runs.length; i++) {
+      runs[i].style.display = "flex";
     }
-    for (var i=0; i < swims.length; i++) {
-      swims[i].style.display = "flex"
+    for (var i = 0; i < swims.length; i++) {
+      swims[i].style.display = "flex";
     }
-    for (var i=0; i < bikes.length; i++) {
-      bikes[i].style.display = "flex"
-    } 
-  }
-  if (filterValue === "Easy") {    
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "flex"
+    for (var i = 0; i < bikes.length; i++) {
+      bikes[i].style.display = "flex";
     }
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "none"
+  } else if (filterValue === "Completed") {
+    for (var i = 0; i < complete.length; i++) {
+      complete[i].style.display = "flex";
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "none"
+    for (var i = 0; i < notComplete.length; i++) {
+      notComplete[i].style.display = "none";
     }
-  }
-  else if (filterValue === "Medium") {
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "flex"
+  } else if (filterValue === "Easy") {
+    for (var i = 0; i < easy.length; i++) {
+      easy[i].style.display = "flex";
     }
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "none"
+    for (var i = 0; i < med.length; i++) {
+      med[i].style.display = "none";
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "none"
-    }  
-  }
-  else if (filterValue === "Hard") {
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "none"
+    for (var i = 0; i < hard.length; i++) {
+      hard[i].style.display = "none";
     }
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "none"
+  } else if (filterValue === "Medium") {
+    for (var i = 0; i < med.length; i++) {
+      med[i].style.display = "flex";
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "flex"
-    } 
-  }
-  else if (filterValue === "Runs") {
-    for (var i=0; i < runs.length; i++) {
-      runs[i].style.display = "flex"
+    for (var i = 0; i < easy.length; i++) {
+      easy[i].style.display = "none";
     }
-    for (var i=0; i < swims.length; i++) {
-      swims[i].style.display = "none"
+    for (var i = 0; i < hard.length; i++) {
+      hard[i].style.display = "none";
     }
-    for (var i=0; i < bikes.length; i++) {
-      bikes[i].style.display = "none"
-    } 
-  }
-  else if (filterValue === "Swims") {
-    for (var i=0; i < runs.length; i++) {
-      runs[i].style.display = "none"
+  } else if (filterValue === "Hard") {
+    for (var i = 0; i < easy.length; i++) {
+      easy[i].style.display = "none";
     }
-    for (var i=0; i < swims.length; i++) {
-      swims[i].style.display = "flex"
+    for (var i = 0; i < med.length; i++) {
+      med[i].style.display = "none";
     }
-    for (var i=0; i < bikes.length; i++) {
-      bikes[i].style.display = "none"
-    } 
-  }
-  else if (filterValue === "Bikes") {
-    for (var i=0; i < runs.length; i++) {
-      runs[i].style.display = "none"
+    for (var i = 0; i < hard.length; i++) {
+      hard[i].style.display = "flex";
     }
-    for (var i=0; i < swims.length; i++) {
-      swims[i].style.display = "none"
+  } else if (filterValue === "Runs") {
+    for (var i = 0; i < runs.length; i++) {
+      runs[i].style.display = "flex";
     }
-    for (var i=0; i < bikes.length; i++) {
-      bikes[i].style.display = "flex"
+    for (var i = 0; i < swims.length; i++) {
+      swims[i].style.display = "none";
+    }
+    for (var i = 0; i < bikes.length; i++) {
+      bikes[i].style.display = "none";
+    }
+  } else if (filterValue === "Swims") {
+    for (var i = 0; i < runs.length; i++) {
+      runs[i].style.display = "none";
+    }
+    for (var i = 0; i < swims.length; i++) {
+      swims[i].style.display = "flex";
+    }
+    for (var i = 0; i < bikes.length; i++) {
+      bikes[i].style.display = "none";
+    }
+  } else if (filterValue === "Bikes") {
+    for (var i = 0; i < runs.length; i++) {
+      runs[i].style.display = "none";
+    }
+    for (var i = 0; i < swims.length; i++) {
+      swims[i].style.display = "none";
+    }
+    for (var i = 0; i < bikes.length; i++) {
+      bikes[i].style.display = "flex";
     }
   }
 }
 
 //add workout
 function displayWorkouts() {
-  const allWorkouts = document.querySelector(".allWorkouts")
-  allWorkouts.innerHTML = ""
+  const allWorkouts = document.querySelector(".allWorkouts");
+  allWorkouts.innerHTML = "";
 
   workouts.forEach((workout) => createWorkoutContent(workout));
 
@@ -277,7 +277,7 @@ function displayWorkouts() {
 
 //workouts content
 function createWorkoutContent(workout) {
-  const allWorkouts = document.querySelector(".allWorkouts")
+  const allWorkouts = document.querySelector(".allWorkouts");
 
   const workoutItem = document.createElement("div");
   workoutItem.className = "listItem";
@@ -333,27 +333,30 @@ function createWorkoutContent(workout) {
   workoutItem.appendChild(edit);
   workoutItem.appendChild(save);
 
-
   if (workout.rank === "Easy") {
-    workoutItem.classList.add("easy", "listItem")
-  }
-  else if (workout.rank === "Medium") {
-    workoutItem.classList.add("medium", "listItem")
-  }
-  else if (workout.rank === "Hard") {
-    workoutItem.classList.add("hard", "listItem")
+    workoutItem.classList.add("easy", "listItem");
+  } else if (workout.rank === "Medium") {
+    workoutItem.classList.add("medium", "listItem");
+  } else if (workout.rank === "Hard") {
+    workoutItem.classList.add("hard", "listItem");
   }
 
   if (workout.sport === "Run") {
-    workoutItem.classList.add("run")
+    workoutItem.classList.add("run");
   } else if (workout.sport === "Swim") {
-    workoutItem.classList.add("swim")
+    workoutItem.classList.add("swim");
   } else if (workout.sport === "Bike") {
-    workoutItem.classList.add("bike")
+    workoutItem.classList.add("bike");
   }
 
-  allWorkouts.appendChild(workoutItem)
+  if (workout.complete === true) {
+    workoutItem.classList.add("complete");
+  } else if (workout.complete === false) {
+    workoutItem.classList.remove("complete")
+    workoutItem.classList.add("notComplete")
+  }
 
+  allWorkouts.appendChild(workoutItem);
 }
 
 async function main() {
@@ -365,7 +368,6 @@ async function main() {
 
   let newWorkoutForm = document.querySelector("#newWorkoutForm");
   let sportDropdown = document.getElementById("sports");
-  
 
   //event listener to get new workout data
   newWorkoutForm.addEventListener("submit", (event) => {
@@ -377,8 +379,7 @@ async function main() {
 
     let sport = sportDropdown.options[sportDropdown.selectedIndex].text;
 
-    let rank = " "
-
+    let rank = " ";
 
     if (time === "") {
       alert("Please input a time");
@@ -390,16 +391,16 @@ async function main() {
     }
   });
 
-  let filterSubmit = document.querySelector("#filterDiv")
-  let filterDropdown = document.querySelector("#filterDropdown")
+  let filterSubmit = document.querySelector("#filterDiv");
+  let filterDropdown = document.querySelector("#filterDropdown");
 
   filterSubmit.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    let filterValue = filterDropdown.options[filterDropdown.selectedIndex].text
+    let filterValue = filterDropdown.options[filterDropdown.selectedIndex].text;
 
     filter(filterValue);
-  })
+  });
 }
 
 main();
