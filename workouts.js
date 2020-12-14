@@ -161,14 +161,34 @@ function distances() {
 }
 
 function filter(filterValue) {
-  let runs = document.querySelector(".runs")
-  let swims = document.querySelector(".swims")
-  let bikes = document.querySelector(".bikes")
+  let runs = document.getElementsByClassName("run")
+  let swims = document.getElementsByClassName("swim")
+  let bikes = document.getElementsByClassName("bike")
 
   let easy = document.getElementsByClassName("easy")
   let med = document.getElementsByClassName("medium")
   let hard = document.getElementsByClassName("hard")
 
+  if (filterValue === "All") {
+    for (var i=0; i < easy.length; i++) {
+      easy[i].style.display = "flex"
+    }
+    for (var i=0; i < med.length; i++) {
+      med[i].style.display = "flex"
+    }
+    for (var i=0; i < hard.length; i++) {
+      hard[i].style.display = "flex"
+    }
+    for (var i=0; i < runs.length; i++) {
+      runs[i].style.display = "flex"
+    }
+    for (var i=0; i < swims.length; i++) {
+      swims[i].style.display = "flex"
+    }
+    for (var i=0; i < bikes.length; i++) {
+      bikes[i].style.display = "flex"
+    } 
+  }
   if (filterValue === "Easy") {    
     for (var i=0; i < easy.length; i++) {
       easy[i].style.display = "flex"
@@ -179,10 +199,6 @@ function filter(filterValue) {
     for (var i=0; i < hard.length; i++) {
       hard[i].style.display = "none"
     }
-
-    swims.style.display = "block"
-    bikes.style.display = "block"
-    runs.style.display = "block"
   }
   else if (filterValue === "Medium") {
     for (var i=0; i < med.length; i++) {
@@ -194,10 +210,6 @@ function filter(filterValue) {
     for (var i=0; i < hard.length; i++) {
       hard[i].style.display = "none"
     }  
-
-    swims.style.display = "block"
-    bikes.style.display = "block"
-    runs.style.display = "block"
   }
   else if (filterValue === "Hard") {
     for (var i=0; i < easy.length; i++) {
@@ -208,69 +220,47 @@ function filter(filterValue) {
     }
     for (var i=0; i < hard.length; i++) {
       hard[i].style.display = "flex"
-    }  
-
-    swims.style.display = "block"
-    bikes.style.display = "block"
-    runs.style.display = "block"
+    } 
   }
   else if (filterValue === "Runs") {
-    swims.style.display = "none"
-    bikes.style.display = "none"
-    runs.style.display = "block"
-
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "flex"
+    for (var i=0; i < runs.length; i++) {
+      runs[i].style.display = "flex"
     }
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "flex"
+    for (var i=0; i < swims.length; i++) {
+      swims[i].style.display = "none"
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "flex"
+    for (var i=0; i < bikes.length; i++) {
+      bikes[i].style.display = "none"
     } 
   }
   else if (filterValue === "Swims") {
-    runs.style.display = "none"
-    bikes.style.display = "none"
-    swims.style.display = "block"
-
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "flex"
+    for (var i=0; i < runs.length; i++) {
+      runs[i].style.display = "none"
     }
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "flex"
+    for (var i=0; i < swims.length; i++) {
+      swims[i].style.display = "flex"
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "flex"
+    for (var i=0; i < bikes.length; i++) {
+      bikes[i].style.display = "none"
     } 
   }
   else if (filterValue === "Bikes") {
-    runs.style.display = "none"
-    swims.style.display = "none"
-    bikes.style.display = "block"
-
-    for (var i=0; i < easy.length; i++) {
-      easy[i].style.display = "flex"
+    for (var i=0; i < runs.length; i++) {
+      runs[i].style.display = "none"
     }
-    for (var i=0; i < med.length; i++) {
-      med[i].style.display = "flex"
+    for (var i=0; i < swims.length; i++) {
+      swims[i].style.display = "none"
     }
-    for (var i=0; i < hard.length; i++) {
-      hard[i].style.display = "flex"
-    } 
+    for (var i=0; i < bikes.length; i++) {
+      bikes[i].style.display = "flex"
+    }
   }
 }
 
 //add workout
 function displayWorkouts() {
-  const runList = document.querySelector(".run");
-  runList.innerHTML = "";
-
-  const swimList = document.querySelector(".swim");
-  swimList.innerHTML = "";
-
-  const bikeList = document.querySelector(".bike");
-  bikeList.innerHTML = "";
+  const allWorkouts = document.querySelector(".allWorkouts")
+  allWorkouts.innerHTML = ""
 
   workouts.forEach((workout) => createWorkoutContent(workout));
 
@@ -279,9 +269,7 @@ function displayWorkouts() {
 
 //workouts content
 function createWorkoutContent(workout) {
-  const runList = document.querySelector(".run");
-  const swimList = document.querySelector(".swim");
-  const bikeList = document.querySelector(".bike");
+  const allWorkouts = document.querySelector(".allWorkouts")
 
   const workoutItem = document.createElement("div");
   workoutItem.className = "listItem";
@@ -325,9 +313,10 @@ function createWorkoutContent(workout) {
   });
 
   workoutItem.innerHTML = `
+  <div> <p> ${workout.sport} </p> </div>
   <div> <p> Distance </p> <input class="distance" type="text" value= "${workout.distance}" disabled> </div> 
   <div> <p>Time </p> <input class="time" type="text" value="${workout.time}" disabled> </div> 
-  <div> <p> Pace </p> <p> ${workout.pace} minutes per mile</p> </div>
+  <div> <p> Pace </p> <p> ${workout.pace} mpm</p> </div>
   <div class="rankDiv"> <label for="rank">Rank</label> <p class="currentRank"> ${workout.rank} </p> <select id="rank" class="rank" disabled style="display:none"> <option value="1"> </option> <option value="2">Easy</option> <option value="3">Medium</option> <option value="4">Hard</option> </select> </div>
   `;
 
@@ -348,12 +337,15 @@ function createWorkoutContent(workout) {
   }
 
   if (workout.sport === "Run") {
-    runList.appendChild(workoutItem);
+    workoutItem.classList.add("run")
   } else if (workout.sport === "Swim") {
-    swimList.appendChild(workoutItem);
+    workoutItem.classList.add("swim")
   } else if (workout.sport === "Bike") {
-    bikeList.appendChild(workoutItem);
+    workoutItem.classList.add("bike")
   }
+
+  allWorkouts.appendChild(workoutItem)
+
 }
 
 async function main() {

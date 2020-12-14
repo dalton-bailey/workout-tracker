@@ -8,7 +8,10 @@ body {
   text-align: center;
 }
 .sectionOne {
-  margin: 25px;
+  margin: 0px 25px;
+}
+.allWorkouts {
+  width: 100%;
 }
 .box {
   width: 50%;
@@ -20,9 +23,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid grey;
-  border-radius: 25px;
+  /* border: 2px solid grey; */
+  /* border-radius: 25px; */
   width: 100%;
+}
+
+.oneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%
 }
 .header {
   letter-spacing: 1px;
@@ -40,15 +50,38 @@ body {
   font-weight: 300;
 }
 .newWorkout {
-  padding: 15px 0px;
+  width: 100%;
+}
+#filterDropdown {
+  padding: 5px 10px;
+  box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
+  border-radius: 5px 0px 0px 5px;
+}
+#filterDiv {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.filterBtn {
+  background-color: black;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 0px 5px 5px 0px;
+}
+#filterDropdown:hover, .filterBtn:hover {
+  cursor: pointer;
 }
 .listItem {
-  border: 1px solid black;
-  border-radius: 15px;
+  /* border: 1px solid black; */
+  /* border-radius: 15px; */
   padding: 15px;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
 }
 .listItem div {
   display: flex;
@@ -56,6 +89,36 @@ body {
 }
 .listItem div p {
   margin: 0px;
+}
+.close {
+  padding: 7px 10px;
+  font-size: 16px;
+  border: none;
+  border: 2px solid #df0404;
+  background-color: transparent;
+  color: #df0404;
+  border-radius: 5px;
+  text-align: center;
+}
+.close:hover {
+  cursor: pointer;
+  background-color: #df0404;
+  color: white;
+}
+.editButton {
+  padding: 7px 6px 7px 9px;
+  font-size: 16px;
+  border: none;
+  border: 2px solid black;
+  background-color: transparent;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+}
+.editButton:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
 }
 .sectionTwo {
   display: flex;
@@ -65,5 +128,23 @@ body {
   justify-content: space-evenly;
   align-items: center;
 }
+.check {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  height: 25px;
+  width: 25px;
+  background-color: #eee;}
+
+  .listItem input:checked {
+    background-color: red;
+  }
+
+  input:disabled {
+    background-color: transparent;
+    border: none;
+    color: black;
+
+  }
 
 

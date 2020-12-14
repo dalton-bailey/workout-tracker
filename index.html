@@ -15,42 +15,14 @@
     <title>Workout App</title>
   </head>
   <body>
-    <div id="loader" class="center"></div> 
     <div style="width: 100%; display: flex; justify-content: flex-end">
       <p class="userName uppercase"></p>
     </div>
     <div class="content">
       <div class="sectionOne">
         <div class="one">
-          <h1 class="header uppercase">Workouts</h1>
-          <div id="filterDiv">
-          <form id="filter">
-                <select id="filterDropdown">
-                  <option value="1">Easy</option>
-                  <option value="2">Medium</option>
-                  <option value="3">Hard</option>
-                  <option value="4">Runs</option>
-                  <option value="5">Swims</option>
-                  <option value="6">Bikes</option>
-                </select>
-          </form>
-          <form>
-            <button type="submit" id="filterBy" class="filterBtn">Filter</button>
-          </form>
-        </div>
-          <div class="sport runs">
-            <h2><i class="fas fa-running"></i></h2>
-            <div class="run"></div>
-          </div>
-          <div class="sport swims">
-            <h2><i class="fas fa-swimmer"></i></h2>
-            <div class="swim"></div>
-          </div>
-          <div class="sport bikes">
-            <h2><i class="fas fa-biking"></i></h2>
-            <div class="bike"></div>
-          </div>
           <div class="newWorkout">
+            <h1 class="header uppercase">New Workout</h1>
             <div id="newWorkoutForm" style="display: flex">
               <form class="name">
                 <label for="sports">Sport</label>
@@ -62,13 +34,11 @@
                 <label for="workoutTime">Time</label>
                 <input type="text" id="workoutTime" placeholder="Time" />
                 <label for="workoutDistance">Distance</label>
-                <input type="text" id="workoutDistance" placeholder="Distance" />
-                <!-- <label for="rank">Rank</label>
-                <select id="rank">
-                  <option value="1">Easy</option>
-                  <option value="2">Medium</option>
-                  <option value="3">Hard</option>
-                </select> -->
+                <input
+                  type="text"
+                  id="workoutDistance"
+                  placeholder="Distance"
+                />
               </form>
               <form>
                 <button type="submit" id="addWorkout" class="addBtn">
@@ -77,45 +47,69 @@
               </form>
             </div>
           </div>
+          <div class="oneHeader">
+            <h1 class="header uppercase">Workouts</h1>
+            <div id="filterDiv">
+              <form id="filter">
+                <select id="filterDropdown" class="uppercase">
+                  <option value="1">All</option>
+                  <option value="2">Easy</option>
+                  <option value="3">Medium</option>
+                  <option value="4">Hard</option>
+                  <option value="5">Runs</option>
+                  <option value="6">Swims</option>
+                  <option value="7">Bikes</option>
+                </select>
+              </form>
+              <form>
+                <button type="submit" id="filterBy" class="filterBtn uppercase">
+                  Filter
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="allWorkouts"></div>
+          
         </div>
       </div>
       <div class="sectionTwo">
         <div class="box two">
           <h1 class="header uppercase text-center">Goals</h1>
           <div class="goals">
-          <div>
-            <i class="fas fa-running"></i>
-            <div id="run-goal"></div>
-          </div>
-          <div>
-            <i class="fas fa-swimmer"></i>
-            <div id="swim-goal"></div>
-          </div>
-          <div>
-            <i class="fas fa-biking"></i>
-            <div id="bike-goal"></div>
-          </div>
-          <div>
-            <div id="newGoalForm" style="display: flex">
-              <form class="name">
-                <select id="goal-sports">
-                  <option value="1">Run</option>
-                  <option value="2">Swim</option>
-                  <option value="3">Bike</option>
-                </select>
-                <input
-                  type="text"
-                  id="gotalDistance"
-                  placeholder="Goal Distance"
-                />
-              </form>
-              <form>
-                <button type="submit" id="addGoal" class="addBtn">+</button>
-              </form>
+            <div>
+              <i class="fas fa-running"></i>
+              <div id="run-goal"></div>
+            </div>
+            <div>
+              <i class="fas fa-swimmer"></i>
+              <div id="swim-goal"></div>
+            </div>
+            <div>
+              <i class="fas fa-biking"></i>
+              <div id="bike-goal"></div>
+            </div>
+            <div>
+              <div id="newGoalForm" style="display: flex">
+                <form class="name">
+                  <select id="goal-sports">
+                    <option value="1">Run</option>
+                    <option value="2">Swim</option>
+                    <option value="3">Bike</option>
+                  </select>
+                  <input
+                    type="text"
+                    id="gotalDistance"
+                    placeholder="Goal Distance"
+                  />
+                </form>
+                <form>
+                  <button type="submit" id="addGoal" class="addBtn">+</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
         <div class="box three">
           <h1 class="header uppercase text-center">Distances</h1>
           <div class="distances">
