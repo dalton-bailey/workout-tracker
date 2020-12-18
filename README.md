@@ -1,14 +1,5 @@
 <h1>Workout Tracker</h1>
 
-
-<h3>Live URL</h3>
-https://workouttrackerdgm3760.netlify.app/ <br/>
-
-<h3>API</h3>
-https://gentle-spire-21312.herokuapp.com/workouts <br/>
-
-*** A Google Chrome extension to block CORS was used to access the API without any errors. ***
-
 A workout tracker app that tracks runs, swims and bike rides.
 
 Add a new workout with the sport, time and distance. Rank is defualt blank and can be added when workout is edited. Also editable is the distance and time.
@@ -21,8 +12,13 @@ When a goal is completed an alert will congradulate the user, but the goal will 
 
 App will show you your total miles traveled of each sport.
 
+<h3>Live URL</h3>
+https://workouttrackerdgm3760.netlify.app/ <br/>
 
+<h3>API</h3>
+https://gentle-spire-21312.herokuapp.com/workouts <br/>
 
+*** A Google Chrome extension to block CORS was used to access the API without any errors. ***
 
 <h1>User Stories</h1>
 
