@@ -41,7 +41,7 @@ async function updateGoal(id, goal) {
   });
 }
 
-//push new workout to workouts array
+//push new workout to workouts array 
 function addWorkoutToArray(t, d, s) {
   const workoutData = {
     complete: false,

@@ -1,24 +1,30 @@
 body {
   font-family: "Lato", sans-serif;
 }
+
 .uppercase {
   text-transform: uppercase;
 }
+
 .text-center {
   text-align: center;
 }
+
 .sectionOne {
   margin: 0px 25px;
 }
+
 .allWorkouts {
   width: 100%;
 }
+
 .box {
   width: 50%;
   /* border: 2px solid grey;
   border-radius: 25px; */
   margin: 20px;
 }
+
 .one {
   display: flex;
   flex-direction: column;
@@ -34,10 +40,62 @@ body {
   justify-content: space-between;
   width: 100%;
 }
+
 .header {
   letter-spacing: 1px;
   font-weight: 400;
 }
+
+.newWorkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  position: absolute;
+}
+
+#newWorkoutForm {
+  box-shadow: 1px 4px 9px 0px #000;
+  padding: 20px;
+  width: 50%;
+  background-color: white;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  width: 100%;
+}
+
+.submitBtn {
+  text-align: center;
+}
+
+.addBtn {
+  padding: 5px 30px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addBtn i {
+  padding-right: 10px;
+}
+
+#sports {
+  padding: 5px 10px;
+  box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
+  border-radius: 5px;
+}
+
 .sport {
   width: 90%;
   margin: 15px 0px;
@@ -45,24 +103,29 @@ body {
   border: 2px solid gray;
   border-radius: 15px;
 }
+
 .sport h2 {
   text-align: center;
   font-weight: 300;
 }
+
 .newWorkout {
   width: 100%;
 }
+
 #filterDropdown {
   padding: 5px 10px;
   box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
   border-radius: 5px 0px 0px 5px;
 }
+
 #filterDiv {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
+
 .filterBtn {
   background-color: black;
   color: white;
@@ -70,10 +133,12 @@ body {
   border: none;
   border-radius: 0px 5px 5px 0px;
 }
+
 #filterDropdown:hover,
 .filterBtn:hover {
   cursor: pointer;
 }
+
 .listItem {
   /* border: 1px solid black; */
   /* border-radius: 15px; */
@@ -84,6 +149,7 @@ body {
   align-items: center;
   box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
 }
+
 .check {
   /* position: absolute;
   top: 0;
@@ -97,9 +163,11 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .listItem div p {
   margin: 0px;
 }
+
 .close {
   padding: 7px 10px;
   font-size: 16px;
@@ -110,11 +178,13 @@ body {
   border-radius: 5px;
   text-align: center;
 }
+
 .close:hover {
   cursor: pointer;
   background-color: #df0404;
   color: white;
 }
+
 .editButton {
   padding: 7px 6px 7px 9px;
   font-size: 16px;
@@ -126,6 +196,7 @@ body {
   text-align: center;
   margin-left: 5px;
 }
+
 .saveButton {
   padding: 7px 9px 7px 10px;
   font-size: 16px;
@@ -147,6 +218,7 @@ body {
 .sectionTwo {
   display: flex;
 }
+
 .distances div,
 .goals div {
   display: flex;
@@ -154,13 +226,15 @@ body {
   align-items: center;
 }
 
-.goal, .totalDistance {
+.goal,
+.totalDistance {
   box-shadow: rgba(86, 86, 86, 0.1) 0px 10px 50px;
   padding: 15px;
   margin-bottom: 15px;
 }
 
-.goal .fas, .totalDistance .fas {
+.goal .fas,
+.totalDistance .fas {
   font-size: 24px;
 }
 

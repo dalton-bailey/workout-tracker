@@ -21,28 +21,35 @@
     <div class="content">
       <div class="sectionOne">
         <div class="one">
+          <h1 class="header uppercase">New Workout</h1>
+          <button class="newWorkout">New Workout</button>
           <div class="newWorkout">
-            <h1 class="header uppercase">New Workout</h1>
-            <div id="newWorkoutForm" style="display: flex">
+            <div id="newWorkoutForm">
               <form class="name">
-                <label for="sports">Sport</label>
-                <select id="sports">
-                  <option value="1">Run</option>
-                  <option value="2">Swim</option>
-                  <option value="3">Bike</option>
-                </select>
-                <label for="workoutTime">Time</label>
-                <input type="text" id="workoutTime" placeholder="Time" />
-                <label for="workoutDistance">Distance</label>
-                <input
-                  type="text"
-                  id="workoutDistance"
-                  placeholder="Distance"
-                />
+                <div class="formInput">
+                  <label for="sports">Sport</label>
+                  <select id="sports">
+                    <option value="1">Run</option>
+                    <option value="2">Swim</option>
+                    <option value="3">Bike</option>
+                  </select>
+                </div>
+                <div class="formInput">
+                  <label for="workoutTime">Time</label>
+                  <input type="text" id="workoutTime" placeholder="Time" />
+                </div>
+                <div class="formInput">
+                  <label for="workoutDistance">Distance</label>
+                  <input
+                    type="text"
+                    id="workoutDistance"
+                    placeholder="Distance"
+                  />
+                </div>
               </form>
-              <form>
-                <button type="submit" id="addWorkout" class="addBtn">
-                  <i class="fas fa-plus"></i>
+              <form class="submitBtn"> 
+                <button type="submit" id="addWorkout" class="addBtn uppercase">
+                  <i class="fas fa-plus"></i>Add Workout
                 </button>
               </form>
             </div>
