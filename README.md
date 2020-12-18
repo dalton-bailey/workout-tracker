@@ -2,7 +2,12 @@
 
 
 <h3>Live URL</h3>
-https://workouttrackerdgm3760.netlify.app/
+https://workouttrackerdgm3760.netlify.app/ <br/>
+
+<h3>API</h3>
+https://gentle-spire-21312.herokuapp.com/workouts <br/>
+
+*** A Google Chrome extension to block CORS was used to access the API without any errors. ***
 
 A workout tracker app that tracks runs, swims and bike rides.
 
@@ -16,7 +21,7 @@ When a goal is completed an alert will congradulate the user, but the goal will 
 
 App will show you your total miles traveled of each sport.
 
-*** A Google Chrome extension to block CORS was used to access the API without any errors. ***
+
 
 
 <h1>User Stories</h1>
@@ -31,3 +36,9 @@ App will show you your total miles traveled of each sport.
     <li>As a user I would like to view total distance of each activity</li>
     <li>As a user I would like to create goals</li>
     <li>As a user I would like to edit goals</li>
+    <li>As a user I would like to delete goals</li>
+    <li>As a user I want to know I have completed a goal</li>
+    <li>As a user I would like to rank activities (easy, medium, hard)</li>
+    <li>As a user I would like to edit activity ranks<li>
+    <li>As a user I would like to remove activity ranks</li>
+    <li>As a user I need to be able to view activities by difficulty<li>
