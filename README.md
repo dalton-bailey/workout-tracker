@@ -1,3 +1,9 @@
+<h1>Workout Tracker</h1>
+
+
+<h3>Live URL</h3>
+https://workouttrackerdgm3760.netlify.app/
+
 A workout tracker app that tracks runs, swims and bike rides.
 
 Add a new workout with the sport, time and distance. Rank is defualt blank and can be added when workout is edited. Also editable is the distance and time.
@@ -11,3 +17,17 @@ When a goal is completed an alert will congradulate the user, but the goal will 
 App will show you your total miles traveled of each sport.
 
 *** A Google Chrome extension to block CORS was used to access the API without any errors. ***
+
+
+<h1>User Stories</h1>
+
+<ol>
+    <li>As a user I need to be able to add a new activity</li>
+    <li>As a user I need to be able to edit an activity</li>
+    <li>As a user I need to be able to delete an activity</li>
+    <li>As a user I need to be able to mark an activity as complete</li>
+    <li>As a user I need to be able to view all activities</li>
+    <li>As a user I need to be able to view activities by type (run, swim, ride)</li>
+    <li>As a user I would like to view total distance of each activity</li>
+    <li>As a user I would like to create goals</li>
+    <li>As a user I would like to edit goals</li>
