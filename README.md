@@ -17,10 +17,7 @@ https://workouttrackerdgm3760.netlify.app/
 
 
 <h3>API</h3>
-https://gentle-spire-21312.herokuapp.com/workouts \
-
-
-** A Google Chrome extension to block CORS was used to access the API without any errors. **
+https://gentle-spire-21312.herokuapp.com/workouts
 
 <h1>User Stories</h1>
 
@@ -40,3 +37,7 @@ https://gentle-spire-21312.herokuapp.com/workouts \
     <li>As a user I would like to edit activity ranks</li>
     <li>As a user I would like to remove activity ranks</li>
     <li>As a user I need to be able to view activities by difficulty</li>
+</ol>
+
+** A Google Chrome extension to block CORS was used to access the API without any errors. **
+
