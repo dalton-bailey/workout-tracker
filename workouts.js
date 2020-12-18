@@ -72,10 +72,6 @@ function completeWorkout(id) {
   const index = workouts.findIndex((workout) => workout._id == id);
   complete = workouts[index]["complete"] = !workouts[index]["complete"];
   updateWorkout(id, workouts[index]);
-
-  let complete = document.getElementsByClassName("complete");
-
-  
 }
 
 //edit workout
@@ -174,7 +170,7 @@ function filter(filterValue) {
   let hard = document.getElementsByClassName("hard");
 
   let complete = document.getElementsByClassName("complete");
-  let notComplete = document.getElementsByClassName("notComplete")
+  let notComplete = document.getElementsByClassName("notComplete");
 
   if (filterValue === "All") {
     for (var i = 0; i < easy.length; i++) {
@@ -195,14 +191,25 @@ function filter(filterValue) {
     for (var i = 0; i < bikes.length; i++) {
       bikes[i].style.display = "flex";
     }
-  } else if (filterValue === "Completed") {
+    for (var i = 0; i < complete.length; i++) {
+      complete[i].style.display = "flex";
+    }
+  } 
+
+  else if (filterValue === "") {
+    for (var i = 0; i < complete.length; i++) {
+      complete[i].style.display = "none";
+    }
+  }
+  else if (filterValue === "Completed") {
     for (var i = 0; i < complete.length; i++) {
       complete[i].style.display = "flex";
     }
     for (var i = 0; i < notComplete.length; i++) {
       notComplete[i].style.display = "none";
     }
-  } else if (filterValue === "Easy") {
+  } 
+  else if (filterValue === "Easy") {
     for (var i = 0; i < easy.length; i++) {
       easy[i].style.display = "flex";
     }
@@ -212,7 +219,8 @@ function filter(filterValue) {
     for (var i = 0; i < hard.length; i++) {
       hard[i].style.display = "none";
     }
-  } else if (filterValue === "Medium") {
+  } 
+  else if (filterValue === "Medium") {
     for (var i = 0; i < med.length; i++) {
       med[i].style.display = "flex";
     }
@@ -222,7 +230,8 @@ function filter(filterValue) {
     for (var i = 0; i < hard.length; i++) {
       hard[i].style.display = "none";
     }
-  } else if (filterValue === "Hard") {
+  } 
+  else if (filterValue === "Hard") {
     for (var i = 0; i < easy.length; i++) {
       easy[i].style.display = "none";
     }
@@ -232,7 +241,8 @@ function filter(filterValue) {
     for (var i = 0; i < hard.length; i++) {
       hard[i].style.display = "flex";
     }
-  } else if (filterValue === "Runs") {
+  } 
+  else if (filterValue === "Runs") {
     for (var i = 0; i < runs.length; i++) {
       runs[i].style.display = "flex";
     }
@@ -242,7 +252,8 @@ function filter(filterValue) {
     for (var i = 0; i < bikes.length; i++) {
       bikes[i].style.display = "none";
     }
-  } else if (filterValue === "Swims") {
+  } 
+  else if (filterValue === "Swims") {
     for (var i = 0; i < runs.length; i++) {
       runs[i].style.display = "none";
     }
@@ -252,7 +263,8 @@ function filter(filterValue) {
     for (var i = 0; i < bikes.length; i++) {
       bikes[i].style.display = "none";
     }
-  } else if (filterValue === "Bikes") {
+  } 
+  else if (filterValue === "Bikes") {
     for (var i = 0; i < runs.length; i++) {
       runs[i].style.display = "none";
     }
@@ -352,8 +364,8 @@ function createWorkoutContent(workout) {
   if (workout.complete === true) {
     workoutItem.classList.add("complete");
   } else if (workout.complete === false) {
-    workoutItem.classList.remove("complete")
-    workoutItem.classList.add("notComplete")
+    workoutItem.classList.remove("complete");
+    workoutItem.classList.add("notComplete");
   }
 
   allWorkouts.appendChild(workoutItem);

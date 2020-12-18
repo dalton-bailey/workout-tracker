@@ -49,6 +49,7 @@ function addWorkoutToArray(t, d, s) {
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
+    rank: " "
   };
 
   postWorkout(workoutData);
