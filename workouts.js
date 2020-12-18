@@ -401,6 +401,7 @@ async function main() {
       addWorkoutToArray(time, distance, sport, rank);
       updateWorkout(time, distance, sport);
     }
+
   });
 
   let filterSubmit = document.querySelector("#filterDiv");
