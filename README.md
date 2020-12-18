@@ -15,12 +15,10 @@ App will show you your total miles traveled of each sport.
 <h3>Live URL</h3>
 https://workouttrackerdgm3760.netlify.app/ 
 
-<br>
 
 <h3>API</h3>
-https://gentle-spire-21312.herokuapp.com/workouts 
+https://gentle-spire-21312.herokuapp.com/workouts \
 
-<br>
 
 ** A Google Chrome extension to block CORS was used to access the API without any errors. **
 
