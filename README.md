@@ -18,7 +18,7 @@ https://workouttrackerdgm3760.netlify.app/ <br>
 <h3>API</h3>
 https://gentle-spire-21312.herokuapp.com/workouts <br>
 
-*** A Google Chrome extension to block CORS was used to access the API without any errors. ***
+** A Google Chrome extension to block CORS was used to access the API without any errors. **
 
 <h1>User Stories</h1>
 
