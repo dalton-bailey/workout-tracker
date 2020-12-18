@@ -13,10 +13,10 @@ When a goal is completed an alert will congradulate the user, but the goal will 
 App will show you your total miles traveled of each sport.
 
 <h3>Live URL</h3>
-https://workouttrackerdgm3760.netlify.app/ <br/>
+https://workouttrackerdgm3760.netlify.app/ </br>
 
 <h3>API</h3>
-https://gentle-spire-21312.herokuapp.com/workouts <br/>
+https://gentle-spire-21312.herokuapp.com/workouts </br>
 
 *** A Google Chrome extension to block CORS was used to access the API without any errors. ***
 
@@ -35,6 +35,6 @@ https://gentle-spire-21312.herokuapp.com/workouts <br/>
     <li>As a user I would like to delete goals</li>
     <li>As a user I want to know I have completed a goal</li>
     <li>As a user I would like to rank activities (easy, medium, hard)</li>
-    <li>As a user I would like to edit activity ranks<li>
+    <li>As a user I would like to edit activity ranks</li>
     <li>As a user I would like to remove activity ranks</li>
     <li>As a user I need to be able to view activities by difficulty<li>
