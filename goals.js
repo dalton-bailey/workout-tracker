@@ -41,7 +41,7 @@ async function updateGoal(id, goal) {
   });
 }
 
-//push new workout to workouts array 
+//push new workout to workouts array
 function addWorkoutToArray(t, d, s) {
   const workoutData = {
     complete: false,
@@ -49,13 +49,12 @@ function addWorkoutToArray(t, d, s) {
     time: t,
     distance: d,
     pace: (t / d).toFixed(2),
-    rank: " "
+    rank: " ",
   };
 
   postWorkout(workoutData);
   workouts.push(workoutData);
   displayWorkouts();
-
 }
 
 //push new goal to goals array
@@ -136,6 +135,26 @@ function displayGoals() {
   bikeGoalsList.forEach((goal) => createBikeGoalContent(goal));
 }
 
+//completed goal
+
+function goalCompleted(goal) {
+  // let runTotal = runWorkoutList
+  //   .reduce((acc, curr) => acc + curr.distance, 0)
+  //   .toFixed(2);
+
+  // let swimTotal = swimWorkoutList
+  //   .reduce((acc, curr) => acc + curr.distance, 0)
+  //   .toFixed(2);
+
+  // let bikeTotal = bikeWorkoutList
+  //   .reduce((acc, curr) => acc + curr.distance, 0)
+  //   .toFixed(2);
+
+  //   console.log(goal.distance)
+
+
+}
+
 //run goal content
 function createRunGoalContent(goal) {
   const runGoal = document.getElementById("run-goal");
@@ -179,6 +198,10 @@ function createRunGoalContent(goal) {
   runGoal.appendChild(close);
   runGoal.appendChild(edit);
   runGoal.appendChild(save);
+
+  if (runTotal >= goal.distance) {
+    alert("Congradulations! You have completed your goal!")
+  }
 }
 
 //swim goal content
@@ -224,6 +247,10 @@ function createSwimGoalContent(goal) {
   swimGoal.appendChild(close);
   swimGoal.appendChild(edit);
   swimGoal.appendChild(save);
+
+  if (swimTotal >= goal.distance) {
+    alert("Congradulations! You have completed your goal!")
+  }
 }
 
 //bike goal content
@@ -269,12 +296,17 @@ function createBikeGoalContent(goal) {
   bikeGoal.appendChild(close);
   bikeGoal.appendChild(edit);
   bikeGoal.appendChild(save);
+
+  if (bikeTotal >= goal.distance) {
+    alert("Congradulations! You have completed your goal!")
+  }
 }
 
 async function main() {
   const fetchedGoals = await fetchGoals();
   goals = fetchedGoals;
   displayGoals();
+  goalCompleted()
 
   console.log(goals);
 
@@ -284,7 +316,8 @@ async function main() {
   //event listener to get new goal data
   newGoalForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    let goalSport = goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
+    let goalSport =
+      goalSportDropdown.options[goalSportDropdown.selectedIndex].text;
 
     let goalDistance = Number(document.getElementById("gotalDistance").value);
 
@@ -292,6 +325,7 @@ async function main() {
       alert("please input a goal distance");
     } else {
       addGoalToArray(goalSport, goalDistance);
+      goalCompleted(goalDistance)
     }
   });
 }
